@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Édition Noire | À Propos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--noir-absolu:#0a0a0a;--noir-charbon:#121212;--noir-velours:#1a1a1a;--gris-anthracite:#2a2a2a;--gris-satin:#3a3a3a;--gris-platine:#8a8a8a;--blanc-creme:#f5f3f0;--or-sombre:#b89a5a;--cuivre:#b87333;--radius-sm:4px;--radius-md:8px;--radius-lg:16px;--shadow-subtile:0 4px 20px rgba(0,0,0,0.3);--shadow-eleve:0 12px 40px rgba(0,0,0,0.4);--transition-normal:0.4s cubic-bezier(0.4,0,0.2,1);--transition-fast:0.2s cubic-bezier(0.4,0,0.2,1);--space-sm:20px;--space-md:40px;--space-lg:80px;--space-xl:120px;}
+        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+        body{font-family:'Montserrat',sans-serif;color:var(--blanc-creme);background-color:var(--noir-charbon);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+        h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600;line-height:1.2;}
+        a{text-decoration:none;color:inherit;}ul{list-style:none;}
+        .container{width:100%;max-width:1400px;margin:0 auto;padding:0 var(--space-md);}
+
+        /* HEADER */
+        .header-sombre{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:var(--space-sm) 0;background-color:rgba(10,10,10,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(42,42,42,0.5);transition:all var(--transition-fast);}
+        .header-sombre.scrolled{padding:12px 0;background-color:rgba(10,10,10,0.98);border-bottom:1px solid var(--gris-anthracite);}
+        .nav-sombre{display:flex;justify-content:space-between;align-items:center;}
+        .logo-sombre{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--blanc-creme);position:relative;display:inline-block;letter-spacing:1px;}
+        .logo-sombre:after{content:'';position:absolute;bottom:2px;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--or-sombre),transparent);}
+        .nav-menu-sombre{display:flex;align-items:center;gap:var(--space-md);}
+        .nav-link-sombre{font-weight:500;font-size:0.9rem;letter-spacing:0.05em;text-transform:uppercase;padding:8px 0;position:relative;transition:color var(--transition-fast);color:var(--gris-platine);}
+        .nav-link-sombre:after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--or-sombre),var(--cuivre));transition:width var(--transition-normal);}
+        .nav-link-sombre:hover,.nav-link-sombre.active{color:var(--blanc-creme);}
+        .nav-link-sombre:hover:after,.nav-link-sombre.active:after{width:100%;}
+        .nav-actions-sombre{display:flex;align-items:center;gap:var(--space-sm);}
+        .nav-icon-sombre{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background-color:transparent;transition:all var(--transition-fast);position:relative;border:1px solid transparent;cursor:pointer;}
+        .nav-icon-sombre:hover{background-color:rgba(42,42,42,0.5);border-color:var(--gris-anthracite);transform:translateY(-2px);}
+        .cart-count-sombre{position:absolute;top:-3px;right:-3px;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);font-size:0.7rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:700;}
+
+        /* HERO CINÉMATIQUE */
+        .hero-about{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding-bottom:var(--space-xl);}
+        .hero-about-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--noir-absolu) 0%,var(--gris-anthracite) 100%);}
+        .hero-about-bg img{width:100%;height:100%;object-fit:cover;opacity:0.3;filter:grayscale(30%);}
+        .hero-about-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.3) 50%,transparent 100%);}
+        .hero-about-content{position:relative;z-index:2;max-width:800px;}
+        .hero-about-eyebrow{font-size:0.8rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--or-sombre);margin-bottom:var(--space-sm);display:flex;align-items:center;gap:15px;}
+        .hero-about-eyebrow:before{content:'';width:40px;height:1px;background:var(--or-sombre);}
+        .hero-about-title{font-size:5rem;line-height:1;margin-bottom:var(--space-md);background:linear-gradient(135deg,var(--blanc-creme) 0%,var(--or-sombre) 60%,var(--cuivre) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero-about-subtitle{font-size:1.2rem;color:var(--gris-platine);max-width:600px;line-height:1.8;}
+
+        /* SECTION GÉNÉRIQUE */
+        .section-ap{padding:var(--space-xl) 0;}
+        .section-label{font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--or-sombre);margin-bottom:var(--space-sm);display:flex;align-items:center;gap:12px;}
+        .section-label:before{content:'';width:30px;height:1px;background:var(--or-sombre);}
+        .section-h2{font-size:3rem;margin-bottom:var(--space-md);background:linear-gradient(135deg,var(--blanc-creme) 0%,var(--or-sombre) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .body-text{color:var(--gris-platine);line-height:1.9;font-size:1rem;}
+        .body-text + .body-text{margin-top:var(--space-sm);}
+
+        /* HISTOIRE SPLIT */
+        .histoire-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center;}
+        .histoire-img{border-radius:var(--radius-lg);overflow:hidden;height:600px;position:relative;border:1px solid rgba(184,154,90,0.2);}
+        .histoire-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8);}
+        .histoire-img-caption{position:absolute;bottom:0;left:0;right:0;padding:var(--space-md);background:linear-gradient(to top,rgba(10,10,10,0.9),transparent);font-size:0.85rem;color:var(--or-sombre);letter-spacing:0.05em;}
+        .annee-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);padding:8px 20px;border-radius:50px;font-size:0.85rem;color:var(--or-sombre);margin-bottom:var(--space-md);}
+
+        /* VALEURS */
+        .valeurs-section{background:var(--noir-absolu);padding:var(--space-xl) 0;}
+        .valeurs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg);}
+        .valeur-card{padding:var(--space-md);border-radius:var(--radius-md);background:linear-gradient(135deg,var(--noir-velours),var(--gris-anthracite));border:1px solid rgba(42,42,42,0.5);transition:all var(--transition-normal);position:relative;overflow:hidden;}
+        .valeur-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-eleve);border-color:rgba(184,154,90,0.3);}
+        .valeur-card:before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:linear-gradient(180deg,var(--or-sombre),var(--cuivre));transition:height var(--transition-normal);}
+        .valeur-card:hover:before{height:100%;}
+        .valeur-icon{width:60px;height:60px;border-radius:50%;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);display:flex;align-items:center;justify-content:center;color:var(--or-sombre);font-size:1.3rem;margin-bottom:var(--space-md);}
+        .valeur-title{font-size:1.3rem;margin-bottom:var(--space-sm);}
+        .valeur-text{color:var(--gris-platine);font-size:0.9rem;line-height:1.7;}
+
+        /* CHIFFRES */
+        .stats-strip{padding:var(--space-lg) 0;border-top:1px solid var(--gris-anthracite);border-bottom:1px solid var(--gris-anthracite);}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:var(--space-md);}
+        .stat-item{}
+        .stat-number{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;background:linear-gradient(135deg,var(--blanc-creme),var(--or-sombre));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+        .stat-label{font-size:0.85rem;color:var(--gris-platine);letter-spacing:0.05em;margin-top:8px;}
+        .stat-divider{width:1px;background:var(--gris-anthracite);margin:0 auto;}
+
+        /* TIMELINE */
+        .timeline{position:relative;padding:var(--space-lg) 0;}
+        .timeline:before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--or-sombre),transparent);transform:translateX(-50%);}
+        .timeline-item{display:grid;grid-template-columns:1fr 60px 1fr;gap:var(--space-md);align-items:center;margin-bottom:var(--space-lg);}
+        .timeline-item:nth-child(even) .timeline-text{order:-1;text-align:right;}
+        .timeline-item:nth-child(even) .timeline-empty{order:0;}
+        .timeline-item:nth-child(odd) .timeline-text{order:2;}
+        .timeline-dot{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));border:3px solid var(--noir-charbon);box-shadow:0 0 20px rgba(184,154,90,0.4);justify-self:center;position:relative;z-index:1;}
+        .timeline-year{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--or-sombre);margin-bottom:8px;}
+        .timeline-title{font-size:1.1rem;margin-bottom:8px;}
+        .timeline-desc{font-size:0.9rem;color:var(--gris-platine);line-height:1.6;}
+
+        /* ÉQUIPE (fond sobre) */
+        .equipe-section{padding:var(--space-xl) 0;}
+        .equipe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg);}
+        .membre-card{text-align:center;}
+        .membre-img{width:160px;height:160px;border-radius:50%;margin:0 auto var(--space-sm);overflow:hidden;border:2px solid rgba(184,154,90,0.3);position:relative;}
+        .membre-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);}
+        .membre-img:after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;opacity:0;transition:opacity var(--transition-fast);}
+        .membre-card:hover .membre-img:after{opacity:1;}
+        .membre-name{font-size:1.2rem;font-family:'Playfair Display',serif;margin-bottom:4px;}
+        .membre-role{font-size:0.8rem;color:var(--or-sombre);letter-spacing:0.1em;text-transform:uppercase;}
+
+        /* CONTACT */
+        .contact-section{padding:var(--space-xl) 0;background:var(--noir-absolu);}
+        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;}
+        .contact-info{display:flex;flex-direction:column;gap:var(--space-md);}
+        .contact-item{display:flex;gap:var(--space-sm);align-items:flex-start;}
+        .contact-icon{width:50px;height:50px;border-radius:50%;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);display:flex;align-items:center;justify-content:center;color:var(--or-sombre);font-size:1.1rem;flex-shrink:0;}
+        .contact-item-title{font-weight:600;margin-bottom:4px;}
+        .contact-item-text{color:var(--gris-platine);font-size:0.9rem;}
+        .contact-form{display:flex;flex-direction:column;gap:var(--space-sm);}
+        .form-group{display:flex;flex-direction:column;gap:8px;}
+        .form-label{font-size:0.85rem;font-weight:500;color:var(--gris-platine);letter-spacing:0.05em;}
+        .form-input,.form-textarea{background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--blanc-creme);padding:14px 18px;border-radius:var(--radius-sm);font-size:0.9rem;outline:none;transition:border-color var(--transition-fast);font-family:'Montserrat',sans-serif;}
+        .form-input:focus,.form-textarea:focus{border-color:var(--or-sombre);}
+        .form-textarea{min-height:140px;resize:vertical;}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm);}
+        .submit-btn{background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border:none;padding:16px 40px;border-radius:var(--radius-sm);font-weight:700;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;gap:10px;width:fit-content;}
+        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(184,154,90,0.3);}
+        .social-links{display:flex;gap:var(--space-sm);margin-top:var(--space-sm);}
+        .social-link{width:44px;height:44px;border-radius:50%;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);display:flex;align-items:center;justify-content:center;color:var(--or-sombre);font-size:1.1rem;transition:all var(--transition-fast);}
+        .social-link:hover{background:var(--or-sombre);color:var(--noir-absolu);transform:translateY(-3px);}
+
+        /* FOOTER */
+        .footer-sombre{background:linear-gradient(180deg,var(--noir-absolu) 0%,#080808 100%);padding:var(--space-xl) 0 var(--space-md);border-top:1px solid var(--gris-anthracite);}
+        .footer-grid-sombre{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);}
+        .footer-col-title-sombre{font-size:1.1rem;margin-bottom:var(--space-md);position:relative;padding-bottom:10px;}
+        .footer-col-title-sombre:after{content:'';position:absolute;bottom:0;left:0;width:40px;height:1px;background:linear-gradient(90deg,var(--or-sombre),transparent);}
+        .footer-links-sombre{display:flex;flex-direction:column;gap:12px;}
+        .footer-link-sombre{color:var(--gris-platine);font-size:0.9rem;transition:all var(--transition-fast);}
+        .footer-link-sombre:hover{color:var(--or-sombre);transform:translateX(5px);}
+        .footer-bottom-sombre{text-align:center;padding-top:var(--space-md);border-top:1px solid var(--gris-anthracite);color:var(--gris-platine);font-size:0.85rem;}
+
+        .hidden-sombre{opacity:0;transform:translateY(30px);transition:all var(--transition-normal);}
+        .visible-sombre{opacity:1;transform:translateY(0);}
+        @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
+        @media(max-width:992px){.nav-menu-sombre{display:none;}.histoire-grid,.contact-grid{grid-template-columns:1fr;}.valeurs-grid{grid-template-columns:1fr 1fr;}.timeline:before{left:20px;}.timeline-item{grid-template-columns:40px 1fr;}.timeline-item:nth-child(even) .timeline-text{order:2;text-align:left;}.timeline-empty{display:none;}.equipe-grid{grid-template-columns:repeat(2,1fr);}.footer-grid-sombre{grid-template-columns:repeat(2,1fr);}.stats-grid{grid-template-columns:repeat(2,1fr);}}
+        @media(max-width:768px){.hero-about-title{font-size:3rem;}.section-h2{font-size:2.2rem;}.valeurs-grid{grid-template-columns:1fr;}.equipe-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+
+    <header class="header-sombre">
+        <div class="container">
+            <nav class="nav-sombre">
+                <a href="index.html" class="logo-sombre">ÉDITION NOIRE</a>
+                <ul class="nav-menu-sombre">
+                    <li><a href="index.html" class="nav-link-sombre">Accueil</a></li>
+                    <li><a href="collections.html" class="nav-link-sombre">Collections</a></li>
+                    <li><a href="boutique.html" class="nav-link-sombre">Boutique</a></li>
+                    <li><a href="apropos.html" class="nav-link-sombre active">À Propos</a></li>
+                </ul>
+                <div class="nav-actions-sombre">
+                    <div class="nav-icon-sombre" id="cartIcon"><i class="fas fa-shopping-bag"></i><span class="cart-count-sombre" id="cartCount">0</span></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-about">
+        <div class="hero-about-bg">
+            <img src="https://images.unsplash.com/photo-1558769132-cb1c458e4222?q=80&w=1470&auto=format&fit=crop" alt="">
+        </div>
+        <div class="hero-about-overlay"></div>
+        <div class="container">
+            <div class="hero-about-content">
+                <div class="hero-about-eyebrow">Notre Histoire</div>
+                <h1 class="hero-about-title">L'Art de<br>l'Élégance Sombre</h1>
+                <p class="hero-about-subtitle">Depuis 2018, Édition Noire redéfinit les codes du luxe avec une vision singulière : faire de l'obscurité une force, du minimalisme une déclaration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-strip">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item hidden-sombre">
+                    <div class="stat-number">2018</div>
+                    <div class="stat-label">Année de fondation</div>
+                </div>
+                <div class="stat-item hidden-sombre">
+                    <div class="stat-number">290</div>
+                    <div class="stat-label">Pièces par collection</div>
+                </div>
+                <div class="stat-item hidden-sombre">
+                    <div class="stat-number">12K+</div>
+                    <div class="stat-label">Clients fidèles</div>
+                </div>
+                <div class="stat-item hidden-sombre">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Univers — Femme, Homme, Enfant</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTOIRE -->
+    <section class="section-ap">
+        <div class="container">
+            <div class="histoire-grid">
+                <div class="hidden-sombre">
+                    <div class="annee-tag"><i class="fas fa-clock"></i> Fondée en 2018</div>
+                    <div class="section-label">Notre Histoire</div>
+                    <h2 class="section-h2">Une vision née de l'ombre</h2>
+                    <p class="body-text">Édition Noire est née d'une conviction simple : la mode la plus puissante est celle qui n'a pas peur de l'obscurité. Fondée à Paris en 2018 par Léa Fontaine et Marc Aurélius, la maison s'est imposée comme une référence du luxe sombre et épuré.</p>
+                    <p class="body-text" style="margin-top:var(--space-sm);">Chaque collection est pensée comme une édition limitée, un objet éditorial autant que vestimentaire. Nous refusons la surproduction et privilégions la qualité absolue des matières, des coupes, des finitions.</p>
+                    <p class="body-text" style="margin-top:var(--space-sm);">Aujourd'hui, Édition Noire habille une clientèle mondiale qui partage cette esthétique : sobre, précise, intemporelle. Une garde-robe qui traverse les saisons sans jamais vieillir.</p>
+                </div>
+                <div class="histoire-img hidden-sombre">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=870&auto=format&fit=crop" alt="Histoire de la marque">
+                    <div class="histoire-img-caption">Atelier Édition Noire — Paris, 2018</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section-ap" style="background:var(--noir-absolu);">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:var(--space-lg);">
+                <div class="section-label" style="justify-content:center;">Nos étapes</div>
+                <h2 class="section-h2" style="text-align:center;">Le parcours</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item hidden-sombre">
+                    <div class="timeline-text">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-title">Création de la maison</div>
+                        <div class="timeline-desc">Léa Fontaine et Marc Aurélius fondent Édition Noire à Paris, avec une première collection capsule de 12 pièces.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div></div>
+                </div>
+                <div class="timeline-item hidden-sombre">
+                    <div></div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">
+                        <div class="timeline-year">2019</div>
+                        <div class="timeline-title">Lancement de la ligne Homme</div>
+                        <div class="timeline-desc">Face au succès de la collection Femme, la maison étend son univers avec une ligne masculine taillée dans les mêmes exigences.</div>
+                    </div>
+                </div>
+                <div class="timeline-item hidden-sombre">
+                    <div class="timeline-text">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-title">Collection Enfant & boutique en ligne</div>
+                        <div class="timeline-desc">Ouverture de la boutique digitale et naissance de la ligne Enfant, pour transmettre l'élégance dès le plus jeune âge.</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                    <div></div>
+                </div>
+                <div class="timeline-item hidden-sombre">
+                    <div></div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-text">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-title">290 pièces & expansion internationale</div>
+                        <div class="timeline-desc">La collection atteint 290 pièces et la clientèle s'étend à plus de 40 pays. Édition Noire s'affirme comme une référence mondiale.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALEURS -->
+    <div class="valeurs-section">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:0;">
+                <div class="section-label" style="justify-content:center;">Ce qui nous anime</div>
+                <h2 class="section-h2" style="text-align:center;">Nos Valeurs</h2>
+            </div>
+            <div class="valeurs-grid">
+                <div class="valeur-card hidden-sombre">
+                    <div class="valeur-icon"><i class="fas fa-gem"></i></div>
+                    <h3 class="valeur-title">Qualité Absolue</h3>
+                    <p class="valeur-text">Chaque pièce est confectionnée dans les matières les plus nobles — laine mérinos, soie, cashmere, cuir pleine fleur. Nous ne transigeons jamais sur la qualité.</p>
+                </div>
+                <div class="valeur-card hidden-sombre">
+                    <div class="valeur-icon"><i class="fas fa-leaf"></i></div>
+                    <h3 class="valeur-title">Durabilité</h3>
+                    <p class="valeur-text">Contre la fast fashion, nous produisons des pièces pensées pour durer. Nos collections capsules limitées garantissent une production raisonnée et responsable.</p>
+                </div>
+                <div class="valeur-card hidden-sombre">
+                    <div class="valeur-icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3 class="valeur-title">Artisanat</h3>
+                    <p class="valeur-text">Nos ateliers parisiens perpétuent les traditions de la haute couture. Chaque couture, chaque bouton, chaque finition est réalisé à la main avec une précision absolue.</p>
+                </div>
+                <div class="valeur-card hidden-sombre">
+                    <div class="valeur-icon"><i class="fas fa-eye"></i></div>
+                    <h3 class="valeur-title">Esthétique Singulière</h3>
+                    <p class="valeur-text">Nous défendons une vision : la beauté dans l'ombre. Une palette sombre, des coupes architecturales, un minimalisme qui dit plus que n'importe quelle ostentation.</p>
+                </div>
+                <div class="valeur-card hidden-sombre">
+                    <div class="valeur-icon"><i class="fas fa-heart"></i></div>
+                    <h3 class="valeur-title">Inclusivité</h3>
+                    <p class="valeur-text">Du XS au XXL, de 3 ans à l'âge adulte — l'élégance n'a pas de frontières. Nos collections sont pensées pour toutes les morphologies et tous les âges.</p>
+                </div>
+                <div class="valeur-card hidden-sombre">
+                    <div class="valeur-icon"><i class="fas fa-infinity"></i></div>
+                    <h3 class="valeur-title">Intemporalité</h3>
+                    <p class="valeur-text">Nous ne créons pas des tendances, nous créons des classiques. Chaque pièce Édition Noire est pensée pour traverser les décennies sans jamais se démoder.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÉQUIPE -->
+    <section class="equipe-section">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:var(--space-lg);">
+                <div class="section-label" style="justify-content:center;">Les visages</div>
+                <h2 class="section-h2" style="text-align:center;">Notre Équipe</h2>
+            </div>
+            <div class="equipe-grid">
+                <div class="membre-card hidden-sombre">
+                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Léa Fontaine"></div>
+                    <div class="membre-name">Léa Fontaine</div>
+                    <div class="membre-role">Directrice Artistique & Co-fondatrice</div>
+                </div>
+                <div class="membre-card hidden-sombre">
+                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Marc Aurélius"></div>
+                    <div class="membre-name">Marc Aurélius</div>
+                    <div class="membre-role">Directeur Général & Co-fondateur</div>
+                </div>
+                <div class="membre-card hidden-sombre">
+                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Sophie Renard"></div>
+                    <div class="membre-name">Sophie Renard</div>
+                    <div class="membre-role">Responsable Création</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div style="margin-bottom:var(--space-lg);">
+                <div class="section-label">Nous contacter</div>
+                <h2 class="section-h2">Restons en contact</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info hidden-sombre">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div class="contact-item-title">Adresse</div>
+                            <div class="contact-item-text">123 Avenue Montaigne<br>75008 Paris, France</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="contact-item-title">Email</div>
+                            <div class="contact-item-text"><a href="mailto:contact@editionnoire.com" style="color:var(--or-sombre);">contact@editionnoire.com</a></div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <div class="contact-item-title">Téléphone</div>
+                            <div class="contact-item-text"><a href="tel:+33123456789" style="color:var(--or-sombre);">+33 1 23 45 67 89</a></div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <div class="contact-item-title">Horaires</div>
+                            <div class="contact-item-text">Lun – Ven : 10h – 19h<br>Sam : 11h – 18h</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contact-item-title" style="margin-bottom:var(--space-sm);">Suivez-nous</div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form hidden-sombre">
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label">Prénom</label><input type="text" class="form-input" placeholder="Votre prénom"></div>
+                        <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" placeholder="Votre nom"></div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="votre@email.com"></div>
+                    <div class="form-group"><label class="form-label">Sujet</label>
+                        <select class="form-input">
+                            <option>Commande & livraison</option>
+                            <option>Retours & échanges</option>
+                            <option>Presse & partenariat</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Votre message..."></textarea></div>
+                    <button class="submit-btn" onclick="handleSubmit()"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-sombre">
+        <div class="container">
+            <div class="footer-grid-sombre">
+                <div><div class="footer-col-title-sombre">ÉDITION NOIRE</div><p style="color:var(--gris-platine);font-size:0.9rem;line-height:1.6;">Une vision sombre et raffinée de la mode. Chaque pièce est une déclaration d'élégance intemporelle.</p></div>
+                <div><div class="footer-col-title-sombre">Boutique</div><div class="footer-links-sombre"><a href="boutique.html" class="footer-link-sombre">Tous les produits</a><a href="collections.html" class="footer-link-sombre">Collections</a></div></div>
+                <div><div class="footer-col-title-sombre">Informations</div><div class="footer-links-sombre"><a href="#" class="footer-link-sombre">Livraison</a><a href="#" class="footer-link-sombre">Retours</a><a href="apropos.html" class="footer-link-sombre">À Propos</a></div></div>
+                <div><div class="footer-col-title-sombre">Contact</div><div class="footer-links-sombre"><a href="mailto:contact@editionnoire.com" class="footer-link-sombre">contact@editionnoire.com</a><a href="tel:+33123456789" class="footer-link-sombre">+33 1 23 45 67 89</a></div></div>
+            </div>
+            <div class="footer-bottom-sombre"><p>&copy; 2024 Édition Noire. Tous droits réservés.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll
+        window.addEventListener('scroll',()=>document.querySelector('.header-sombre').classList.toggle('scrolled',window.scrollY>50));
+        // Scroll animations
+        const obs=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible-sombre');}),{threshold:0.1});
+        document.querySelectorAll('.hidden-sombre').forEach(el=>obs.observe(el));
+
+        // Cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('enCart')) || [];
+        function updateCartCount(){const total=cart.reduce((s,i)=>s+i.quantity,0);const el=document.getElementById('cartCount');el.textContent=total;el.style.display=total>0?'flex':'none';}
+        document.getElementById('cartIcon').addEventListener('click',()=>{window.location.href='boutique.html';});
+        updateCartCount();
+
+        // Form
+        function handleSubmit(){
+            alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+        }
+    </script>
+</body>
+</html>
