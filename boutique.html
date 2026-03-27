@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Édition Noire | Boutique</title>
+    <title>Rimka Shop | Boutique</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -29,6 +29,7 @@
         .nav-icon-sombre{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background-color:transparent;transition:all var(--transition-fast);position:relative;border:1px solid transparent;cursor:pointer;}
         .nav-icon-sombre:hover{background-color:rgba(42,42,42,0.5);border-color:var(--gris-anthracite);transform:translateY(-2px);}
         .cart-count-sombre{position:absolute;top:-3px;right:-3px;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);font-size:0.7rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:700;}
+        .fav-count{position:absolute;top:-3px;right:-3px;background:linear-gradient(135deg,#ff4d6d,#c9184a);color:#fff;font-size:0.7rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:700;}
 
         /* PAGE HERO */
         .page-hero{padding:160px 0 80px;background:radial-gradient(circle at 70% 30%,rgba(184,154,90,0.08) 0%,transparent 60%),linear-gradient(180deg,var(--noir-absolu) 0%,var(--noir-charbon) 100%);text-align:center;}
@@ -57,15 +58,13 @@
         .filter-group:last-child{border-bottom:none;}
         .filter-group-title{font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blanc-creme);margin-bottom:var(--space-sm);}
         .price-range{display:flex;flex-direction:column;gap:12px;}
-        .price-inputs{display:flex;gap:10px;}
-        .price-input{flex:1;background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--blanc-creme);padding:10px;border-radius:var(--radius-sm);font-size:0.85rem;outline:none;font-family:'Montserrat',sans-serif;}
+        .price-inputs{display:flex;gap:10px;flex-wrap:wrap;}
+        .price-input{flex:1;background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--blanc-creme);padding:10px;border-radius:var(--radius-sm);font-size:0.85rem;outline:none;font-family:'Montserrat',sans-serif;min-width:100px;}
         .price-input:focus{border-color:var(--or-sombre);}
         .checkbox-label{display:flex;align-items:center;gap:10px;cursor:pointer;padding:6px 0;color:var(--gris-platine);font-size:0.9rem;transition:color var(--transition-fast);}
         .checkbox-label:hover{color:var(--blanc-creme);}
         .checkbox-label input[type="checkbox"]{width:16px;height:16px;accent-color:var(--or-sombre);cursor:pointer;}
-        .color-filters{display:flex;gap:10px;flex-wrap:wrap;}
-        .color-filter{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid var(--gris-anthracite);transition:all var(--transition-fast);}
-        .color-filter:hover,.color-filter.active{transform:scale(1.2);border-color:var(--or-sombre);box-shadow:0 0 10px rgba(184,154,90,0.4);}
+        .category-stats{font-size:0.75rem;color:var(--or-sombre);margin-left:auto;}
         .apply-filters-btn{width:100%;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border:none;padding:14px;border-radius:var(--radius-sm);font-weight:700;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast);margin-top:var(--space-sm);}
         .apply-filters-btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(184,154,90,0.3);}
 
@@ -85,6 +84,7 @@
         .product-card:hover .product-actions-overlay{opacity:1;transform:translateX(0);}
         .action-btn{width:38px;height:38px;border-radius:50%;background:rgba(10,10,10,0.8);backdrop-filter:blur(10px);border:1px solid var(--gris-anthracite);display:flex;align-items:center;justify-content:center;color:var(--blanc-creme);cursor:pointer;transition:all var(--transition-fast);}
         .action-btn:hover{background:var(--or-sombre);color:var(--noir-absolu);transform:scale(1.1);}
+        .action-btn.favoris.active{background:#ff4d6d;border-color:#ff4d6d;color:#fff;}
         .product-info{padding:var(--space-sm);}
         .product-cat{font-size:0.75rem;color:var(--or-sombre);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
         .product-name{font-size:1rem;font-family:'Playfair Display',serif;margin-bottom:6px;}
@@ -92,20 +92,27 @@
         .product-price-row{display:flex;align-items:center;gap:10px;margin-bottom:15px;}
         .product-price{font-size:1.1rem;font-weight:700;}
         .product-price-old{font-size:0.85rem;color:var(--gris-platine);text-decoration:line-through;}
-        .sizes-row{display:flex;gap:6px;margin-bottom:15px;flex-wrap:wrap;}
-        .size-chip{min-width:32px;height:28px;border-radius:var(--radius-sm);background:var(--noir-velours);border:1px solid var(--gris-anthracite);display:flex;align-items:center;justify-content:center;font-size:0.75rem;cursor:pointer;transition:all var(--transition-fast);color:var(--gris-platine);padding:0 6px;}
-        .size-chip:hover,.size-chip.selected{background:var(--or-sombre);color:var(--noir-absolu);border-color:var(--or-sombre);}
-        .size-chip.unavailable{opacity:0.35;cursor:not-allowed;text-decoration:line-through;}
-        .size-chip.unavailable:hover{background:var(--noir-velours);color:var(--gris-platine);border-color:var(--gris-anthracite);}
+
+        /* SIZE SELECTOR ON CARD */
+        .product-size-selector{margin:0 0 15px;}
+        .size-label{font-size:0.7rem;color:var(--gris-platine);letter-spacing:0.15em;margin-bottom:8px;display:block;font-weight:600;}
+        .size-buttons{display:flex;flex-wrap:wrap;gap:8px;}
+        .size-btn-card{padding:6px 12px;min-width:38px;border-radius:var(--radius-sm);border:1px solid var(--gris-anthracite);background:var(--noir-velours);color:var(--gris-platine);font-size:0.75rem;font-weight:600;cursor:pointer;transition:all var(--transition-fast);text-align:center;}
+        .size-btn-card:hover{border-color:var(--or-sombre);color:var(--blanc-creme);background:rgba(184,154,90,0.15);}
+        .size-btn-card.active{background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border-color:transparent;box-shadow:0 2px 8px rgba(184,154,90,0.3);}
+
         .add-to-cart-btn{width:100%;background:linear-gradient(135deg,var(--gris-anthracite),var(--noir-velours));color:var(--blanc-creme);border:1px solid var(--gris-anthracite);padding:12px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;gap:8px;}
         .add-to-cart-btn:hover{background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border-color:transparent;transform:translateY(-2px);box-shadow:0 5px 15px rgba(184,154,90,0.3);}
 
         /* PAGINATION */
-        .pagination{display:flex;justify-content:center;gap:10px;padding:var(--space-lg) 0;}
-        .page-btn{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--gris-platine);cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
-        .page-btn:hover,.page-btn.active{background:var(--or-sombre);color:var(--noir-absolu);border-color:var(--or-sombre);}
+        .pagination{display:flex;justify-content:center;align-items:center;gap:10px;padding:var(--space-lg) 0;flex-wrap:wrap;}
+        .page-btn{min-width:44px;height:44px;padding:0 12px;border-radius:var(--radius-sm);background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--gris-platine);cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+        .page-btn:hover:not(:disabled){background:var(--or-sombre);color:var(--noir-absolu);border-color:var(--or-sombre);}
+        .page-btn.active{background:var(--or-sombre);color:var(--noir-absolu);border-color:var(--or-sombre);}
+        .page-btn:disabled{opacity:0.5;cursor:not-allowed;}
+        .pagination-dots{color:var(--gris-platine);padding:0 5px;font-size:1rem;}
 
-        /* CART & CO */
+        /* CART SIDEBAR */
         .cart-sidebar-sombre{position:fixed;top:0;right:-450px;width:100%;max-width:400px;height:100%;background:linear-gradient(135deg,var(--noir-absolu),var(--noir-charbon));z-index:2000;transition:right var(--transition-normal);display:flex;flex-direction:column;box-shadow:-5px 0 30px rgba(0,0,0,0.5);border-left:1px solid var(--gris-anthracite);}
         .cart-sidebar-sombre.active{right:0;}
         .cart-header-sombre{padding:var(--space-md);border-bottom:1px solid var(--gris-anthracite);display:flex;justify-content:space-between;align-items:center;}
@@ -120,7 +127,6 @@
         .cart-item-image-sombre img{width:100%;height:100%;object-fit:cover;}
         .cart-item-details-sombre{flex:1;display:flex;flex-direction:column;justify-content:space-between;}
         .cart-item-title-sombre{font-weight:600;font-size:0.95rem;margin-bottom:5px;}
-        .cart-item-meta-sombre{font-size:0.8rem;color:var(--gris-platine);}
         .cart-item-actions-sombre{display:flex;align-items:center;justify-content:space-between;}
         .cart-item-quantity-sombre{display:flex;align-items:center;gap:10px;}
         .quantity-btn-sombre{width:28px;height:28px;border-radius:50%;background:var(--gris-anthracite);border:1px solid var(--gris-satin);display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:600;transition:all var(--transition-fast);color:var(--blanc-creme);}
@@ -134,11 +140,77 @@
         .cart-total-final-sombre{font-size:1.2rem;font-weight:700;margin-top:10px;padding-top:10px;border-top:1px solid var(--gris-anthracite);color:var(--blanc-creme);}
         .whatsapp-order-sombre{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:linear-gradient(135deg,#25D366,#1DA851);color:var(--noir-absolu);border:none;padding:18px;border-radius:var(--radius-sm);font-weight:700;font-size:0.95rem;cursor:pointer;transition:all var(--transition-normal);text-transform:uppercase;letter-spacing:0.1em;}
         .whatsapp-order-sombre:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(37,211,102,0.3);}
+
+        /* Sélecteur de taille dans le panier */
+        .cart-size-selector{background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--blanc-creme);padding:6px 10px;border-radius:var(--radius-sm);font-size:0.8rem;cursor:pointer;width:auto;outline:none;transition:all var(--transition-fast);}
+        .cart-size-selector:hover,.cart-size-selector:focus{border-color:var(--or-sombre);}
+
+        /* FAVORIS SIDEBAR */
+        .favorites-sidebar{position:fixed;top:0;right:-450px;width:100%;max-width:400px;height:100%;background:linear-gradient(135deg,var(--noir-absolu),var(--noir-charbon));z-index:2000;transition:right var(--transition-normal);display:flex;flex-direction:column;box-shadow:-5px 0 30px rgba(0,0,0,0.5);border-left:1px solid var(--gris-anthracite);}
+        .favorites-sidebar.active{right:0;}
+        .favorites-header{padding:var(--space-md);border-bottom:1px solid var(--gris-anthracite);display:flex;justify-content:space-between;align-items:center;}
+        .favorites-title{font-size:1.4rem;background:linear-gradient(135deg,var(--blanc-creme),#ff4d6d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .close-favorites{background:rgba(42,42,42,0.5);border:1px solid var(--gris-anthracite);cursor:pointer;color:var(--gris-platine);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast);}
+        .close-favorites:hover{color:var(--blanc-creme);background:var(--gris-anthracite);transform:rotate(90deg);}
+        .favorites-items{flex:1;padding:var(--space-md);overflow-y:auto;}
+        .favorites-empty{text-align:center;padding:60px 20px;color:var(--gris-platine);}
+        .favorites-empty i{font-size:3rem;margin-bottom:20px;color:var(--gris-anthracite);display:block;}
+        .fav-item{display:flex;gap:var(--space-sm);padding:var(--space-sm) 0;border-bottom:1px solid var(--gris-anthracite);align-items:flex-start;}
+        .fav-item-img{width:70px;height:90px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;border:1px solid var(--gris-anthracite);}
+        .fav-item-img img{width:100%;height:100%;object-fit:cover;}
+        .fav-item-info{flex:1;}
+        .fav-item-name{font-size:0.95rem;font-weight:600;margin-bottom:4px;}
+        .fav-item-price{font-size:0.9rem;color:var(--or-sombre);font-weight:700;margin-bottom:10px;}
+        .fav-size-selector{margin-bottom:10px;}
+        .fav-size-label{font-size:0.65rem;color:var(--gris-platine);letter-spacing:0.1em;margin-bottom:6px;display:block;text-transform:uppercase;}
+        .fav-size-buttons{display:flex;flex-wrap:wrap;gap:6px;}
+        .fav-size-btn{padding:4px 10px;border-radius:var(--radius-sm);border:1px solid var(--gris-anthracite);background:var(--noir-velours);color:var(--gris-platine);font-size:0.7rem;font-weight:500;cursor:pointer;transition:all var(--transition-fast);}
+        .fav-size-btn:hover{border-color:var(--or-sombre);color:var(--blanc-creme);}
+        .fav-size-btn.active{background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border-color:transparent;}
+        .fav-actions-row{display:flex;gap:8px;margin-top:4px;}
+        .fav-add-cart{flex:1;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border:none;padding:8px 10px;border-radius:var(--radius-sm);font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:5px;}
+        .fav-add-cart:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(184,154,90,0.3);}
+        .fav-remove{background:none;border:1px solid rgba(255,107,107,0.3);color:#ff6b6b;cursor:pointer;font-size:0.72rem;padding:8px 10px;border-radius:var(--radius-sm);transition:all 0.2s;display:flex;align-items:center;gap:5px;}
+        .fav-remove:hover{background:rgba(255,107,107,0.1);transform:scale(1.02);}
+        .add-all-to-cart-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border:none;padding:16px;border-radius:var(--radius-sm);font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:0.05em;}
+        .add-all-to-cart-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(184,154,90,0.3);}
+
+        /* QUICKVIEW MODAL */
+        .quickview-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:3000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s ease;backdrop-filter:blur(6px);}
+        .quickview-overlay.active{opacity:1;visibility:visible;}
+        .quickview-modal{background:linear-gradient(135deg,var(--noir-velours),var(--gris-anthracite));border:1px solid rgba(184,154,90,0.2);border-radius:var(--radius-lg);width:90%;max-width:860px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(30px) scale(0.97);transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
+        .quickview-overlay.active .quickview-modal{transform:translateY(0) scale(1);}
+        .quickview-close{position:absolute;top:16px;right:16px;z-index:10;width:38px;height:38px;border-radius:50%;background:rgba(42,42,42,0.8);border:1px solid var(--gris-anthracite);color:var(--gris-platine);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+        .quickview-close:hover{background:var(--or-sombre);color:var(--noir-absolu);transform:rotate(90deg);}
+        .quickview-content{display:grid;grid-template-columns:1fr 1fr;min-height:460px;}
+        .quickview-img-wrap{position:relative;overflow:hidden;border-radius:var(--radius-lg) 0 0 var(--radius-lg);}
+        .quickview-img{width:100%;height:100%;object-fit:cover;min-height:460px;}
+        .quickview-badge{position:absolute;top:16px;left:16px;}
+        .quickview-info{padding:40px 36px;display:flex;flex-direction:column;justify-content:center;gap:20px;}
+        .quickview-cat{font-size:0.75rem;color:var(--or-sombre);text-transform:uppercase;letter-spacing:0.15em;}
+        .quickview-name{font-family:'Playfair Display',serif;font-size:1.7rem;line-height:1.2;color:var(--blanc-creme);}
+        .quickview-price-row{display:flex;align-items:center;gap:12px;}
+        .quickview-price{font-size:1.4rem;font-weight:700;color:var(--blanc-creme);}
+        .quickview-old-price{font-size:1rem;color:var(--gris-platine);text-decoration:line-through;}
+        .quickview-desc{font-size:0.9rem;color:var(--gris-platine);line-height:1.7;}
+        .quickview-label{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gris-platine);margin-bottom:10px;}
+        .quickview-size-btns{display:flex;gap:8px;flex-wrap:wrap;}
+        .size-btn{padding:8px 16px;border-radius:var(--radius-sm);border:1px solid var(--gris-anthracite);background:var(--noir-velours);color:var(--gris-platine);font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.2s;}
+        .size-btn:hover,.size-btn.active{border-color:var(--or-sombre);color:var(--blanc-creme);background:rgba(184,154,90,0.1);}
+        .quickview-add-btn{background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border:none;padding:16px;border-radius:var(--radius-sm);font-weight:700;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;}
+        .quickview-add-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(184,154,90,0.35);}
+        .quickview-fav-btn{margin-top:8px;width:100%;background:linear-gradient(135deg,var(--gris-anthracite),var(--noir-velours));color:var(--blanc-creme);border:1px solid var(--gris-anthracite);padding:14px;border-radius:var(--radius-sm);font-weight:700;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;justify-content:center;gap:10px;}
+        .quickview-fav-btn:hover{background:linear-gradient(135deg,#ff4d6d,#c9184a);color:var(--blanc-creme);border-color:#ff4d6d;transform:translateY(-2px);box-shadow:0 5px 15px rgba(255,77,109,0.3);}
+        .quickview-fav-btn.active{background:linear-gradient(135deg,#ff4d6d,#c9184a);color:var(--blanc-creme);border-color:#ff4d6d;}
+
+        /* BACKDROP & TOAST */
         .backdrop-sombre{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.7);z-index:1500;opacity:0;visibility:hidden;transition:all var(--transition-normal);backdrop-filter:blur(5px);}
         .backdrop-sombre.active{opacity:1;visibility:visible;}
-        .toast-sombre{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--noir-velours),var(--gris-anthracite));color:var(--blanc-creme);padding:16px 24px;border-radius:var(--radius-sm);box-shadow:var(--shadow-eleve);z-index:3000;display:flex;align-items:center;gap:12px;transform:translateY(100px);opacity:0;transition:all var(--transition-normal);border:1px solid var(--gris-anthracite);}
+        .toast-sombre{position:fixed;bottom:30px;right:30px;background:linear-gradient(135deg,var(--noir-velours),var(--gris-anthracite));color:var(--blanc-creme);padding:16px 24px;border-radius:var(--radius-sm);box-shadow:var(--shadow-eleve);z-index:4000;display:flex;align-items:center;gap:12px;transform:translateY(100px);opacity:0;transition:all var(--transition-normal);border:1px solid var(--gris-anthracite);}
         .toast-sombre.active{transform:translateY(0);opacity:1;}
         .toast-icon-sombre{color:var(--or-sombre);font-size:1.2rem;}
+
+        /* FOOTER */
         .footer-sombre{background:linear-gradient(180deg,var(--noir-absolu) 0%,#080808 100%);padding:var(--space-xl) 0 var(--space-md);border-top:1px solid var(--gris-anthracite);}
         .footer-grid-sombre{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);}
         .footer-col-title-sombre{font-size:1.1rem;margin-bottom:var(--space-md);position:relative;padding-bottom:10px;}
@@ -152,7 +224,7 @@
 
         @media(max-width:1200px){.shop-layout{grid-template-columns:1fr;}.sidebar-filters{position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);}}
         @media(max-width:992px){.nav-menu-sombre{display:none;}.footer-grid-sombre{grid-template-columns:repeat(2,1fr);}}
-        @media(max-width:768px){.page-hero-title{font-size:2.5rem;}.products-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}.sidebar-filters{grid-template-columns:1fr;}.toolbar-inner{flex-direction:column;align-items:flex-start;}}
+        @media(max-width:768px){.page-hero-title{font-size:2.5rem;}.products-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}.sidebar-filters{grid-template-columns:1fr;}.toolbar-inner{flex-direction:column;align-items:flex-start;}.quickview-content{grid-template-columns:1fr;}.quickview-img{min-height:260px;}.quickview-img-wrap{border-radius:var(--radius-lg) var(--radius-lg) 0 0;}.quickview-info{padding:24px 20px;}}
     </style>
 </head>
 <body>
@@ -160,7 +232,7 @@
     <header class="header-sombre">
         <div class="container">
             <nav class="nav-sombre">
-                <a href="index.html" class="logo-sombre">ÉDITION NOIRE</a>
+                <a href="index.html" class="logo-sombre">RIMKA SHOP</a>
                 <ul class="nav-menu-sombre">
                     <li><a href="index.html" class="nav-link-sombre">Accueil</a></li>
                     <li><a href="collections.html" class="nav-link-sombre">Collections</a></li>
@@ -168,7 +240,14 @@
                     <li><a href="apropos.html" class="nav-link-sombre">À Propos</a></li>
                 </ul>
                 <div class="nav-actions-sombre">
-                    <div class="nav-icon-sombre" id="cartIcon"><i class="fas fa-shopping-bag"></i><span class="cart-count-sombre" id="cartCount">0</span></div>
+                    <div class="nav-icon-sombre" id="favIcon" style="position:relative;">
+                        <i class="fas fa-heart"></i>
+                        <span class="fav-count" id="favCount">0</span>
+                    </div>
+                    <div class="nav-icon-sombre" id="cartIcon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count-sombre" id="cartCount">0</span>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -177,22 +256,48 @@
     <div class="backdrop-sombre" id="backdrop"></div>
     <div class="toast-sombre" id="toast"><i class="fas fa-check-circle toast-icon-sombre"></i><span id="toastMsg"></span></div>
 
+    <!-- PANIER -->
     <div class="cart-sidebar-sombre" id="cartSidebar">
-        <div class="cart-header-sombre"><h3 class="cart-title-sombre">Votre Sélection</h3><button class="close-cart-sombre" id="closeCart"><i class="fas fa-times"></i></button></div>
-        <div class="cart-items-sombre" id="cartItems"><div class="cart-empty-sombre"><i class="fas fa-shopping-bag"></i><p>Votre panier est vide</p></div></div>
+        <div class="cart-header-sombre">
+            <h3 class="cart-title-sombre">Votre Sélection</h3>
+            <button class="close-cart-sombre" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items-sombre" id="cartItems">
+            <div class="cart-empty-sombre"><i class="fas fa-shopping-bag"></i><p>Votre panier est vide</p></div>
+        </div>
         <div class="cart-footer-sombre">
-            <div class="cart-totals-sombre"><div class="cart-total-row-sombre"><span>Sous-total</span><span id="cartSubtotal">€0.00</span></div><div class="cart-total-row-sombre"><span>Livraison</span><span>Gratuite</span></div><div class="cart-total-row-sombre cart-total-final-sombre"><span>Total</span><span id="cartTotal">€0.00</span></div></div>
+            <div class="cart-totals-sombre">
+                <div class="cart-total-row-sombre"><span>Sous-total</span><span id="cartSubtotal">0 CFA</span></div>
+                <div class="cart-total-row-sombre"><span>Livraison</span><span>Gratuite</span></div>
+                <div class="cart-total-row-sombre cart-total-final-sombre"><span>Total</span><span id="cartTotal">0 CFA</span></div>
+            </div>
             <button class="whatsapp-order-sombre" id="whatsappOrder"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- FAVORIS -->
+    <div class="favorites-sidebar" id="favoritesSidebar">
+        <div class="favorites-header">
+            <h3 class="favorites-title">Mes Favoris</h3>
+            <button class="close-favorites" id="closeFavorites"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="favorites-items" id="favoritesItems">
+            <div class="favorites-empty"><i class="fas fa-heart"></i><p>Aucun favori pour l'instant</p></div>
+        </div>
+        <div class="cart-footer-sombre">
+            <button class="add-all-to-cart-btn" id="addAllFavoritesToCart">
+                <i class="fas fa-shopping-bag"></i> Ajouter tous au panier
+            </button>
         </div>
     </div>
 
     <!-- PAGE HERO -->
     <div class="page-hero">
         <div class="container">
-            <div class="page-hero-eyebrow">290 Pièces Sélectionnées</div>
+            <div class="page-hero-eyebrow">Rimka Shop — 2024</div>
             <h1 class="page-hero-title">La Boutique</h1>
-            <p class="page-hero-subtitle">Toute la collection Édition Noire réunie en un seul endroit.</p>
-            <div class="product-count"><i class="fas fa-layer-group"></i> <span id="countDisplay">12 produits</span></div>
+            <p class="page-hero-subtitle">Toute la collection Rimka Shop réunie en un seul endroit.</p>
+            <div class="product-count"><i class="fas fa-layer-group"></i> <span id="countDisplay">0 produits</span></div>
         </div>
     </div>
 
@@ -210,7 +315,7 @@
                     <button class="filter-btn" data-filter="exclusive">Exclusifs</button>
                 </div>
                 <div style="display:flex;align-items:center;gap:var(--space-sm);">
-                    <span class="results-info"><span id="resultCount">12</span> résultats</span>
+                    <span class="results-info"><span id="resultCount">0</span> résultats</span>
                     <select class="sort-select" id="sortSelect">
                         <option value="default">Trier par</option>
                         <option value="price-asc">Prix croissant</option>
@@ -229,48 +334,34 @@
             <!-- SIDEBAR -->
             <aside class="sidebar-filters">
                 <div class="filter-group">
-                    <div class="filter-group-title">Prix</div>
+                    <div class="filter-group-title">Prix (CFA)</div>
                     <div class="price-range">
                         <div class="price-inputs">
-                            <input type="number" class="price-input" placeholder="Min €" id="priceMin">
-                            <input type="number" class="price-input" placeholder="Max €" id="priceMax">
+                            <input type="number" class="price-input" placeholder="Min" id="priceMin">
+                            <input type="number" class="price-input" placeholder="Max" id="priceMax">
                         </div>
                     </div>
                 </div>
-                <div class="filter-group">
-                    <div class="filter-group-title">Catégorie</div>
-                    <label class="checkbox-label"><input type="checkbox" checked> Femme <span style="margin-left:auto;color:var(--or-sombre);font-size:0.8rem;">5</span></label>
-                    <label class="checkbox-label"><input type="checkbox" checked> Homme <span style="margin-left:auto;color:var(--or-sombre);font-size:0.8rem;">4</span></label>
-                    <label class="checkbox-label"><input type="checkbox" checked> Enfant <span style="margin-left:auto;color:var(--or-sombre);font-size:0.8rem;">3</span></label>
+                
+                <!-- SECTION SOUS-CATÉGORIES - GÉNÉRÉE DYNAMIQUEMENT -->
+                <div class="filter-group" id="subcategoryFilterGroup">
+                    <div class="filter-group-title">Sous-catégorie</div>
+                    <div id="subcategoryFilters"></div>
                 </div>
-                <div class="filter-group">
-                    <div class="filter-group-title">Couleur</div>
-                    <div class="color-filters">
-                        <div class="color-filter active" style="background:#0a0a0a;" title="Noir Absolu"></div>
-                        <div class="color-filter" style="background:#2a2a2a;" title="Anthracite"></div>
-                        <div class="color-filter" style="background:#f5f3f0;border-color:#555;" title="Blanc Crème"></div>
-                        <div class="color-filter" style="background:#b89a5a;" title="Or Sombre"></div>
-                        <div class="color-filter" style="background:#2a5caa;" title="Bleu Marine"></div>
-                    </div>
-                </div>
+                
                 <div class="filter-group">
                     <div class="filter-group-title">Disponibilité</div>
-                    <label class="checkbox-label"><input type="checkbox" checked> En stock</label>
-                    <label class="checkbox-label"><input type="checkbox"> Promotions uniquement</label>
-                    <label class="checkbox-label"><input type="checkbox"> Nouveautés uniquement</label>
+                    <label class="checkbox-label"><input type="checkbox" id="stockCheckbox" checked> En stock</label>
+                    <label class="checkbox-label"><input type="checkbox" id="promoCheckbox"> Promotions uniquement</label>
+                    <label class="checkbox-label"><input type="checkbox" id="newCheckbox"> Nouveautés uniquement</label>
                 </div>
-                <button class="apply-filters-btn"><i class="fas fa-sliders-h"></i> Appliquer les filtres</button>
+                <button class="apply-filters-btn" id="applyFiltersBtn"><i class="fas fa-sliders-h"></i> Appliquer les filtres</button>
             </aside>
 
             <!-- PRODUCTS -->
             <div>
                 <div class="products-grid" id="productsGrid"></div>
-                <div class="pagination">
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
+                <div class="pagination" id="paginationContainer"></div>
             </div>
         </div>
     </div>
@@ -279,137 +370,918 @@
     <footer class="footer-sombre">
         <div class="container">
             <div class="footer-grid-sombre">
-                <div><div class="footer-col-title-sombre">ÉDITION NOIRE</div><p style="color:var(--gris-platine);font-size:0.9rem;line-height:1.6;">Une vision sombre et raffinée de la mode.</p></div>
+                <div><div class="footer-col-title-sombre">RIMKA SHOP</div><p style="color:var(--gris-platine);font-size:0.9rem;line-height:1.6;">Une vision sombre et raffinée de la mode.</p></div>
                 <div><div class="footer-col-title-sombre">Boutique</div><div class="footer-links-sombre"><a href="boutique.html" class="footer-link-sombre">Tous les produits</a><a href="collections.html" class="footer-link-sombre">Collections</a></div></div>
                 <div><div class="footer-col-title-sombre">Informations</div><div class="footer-links-sombre"><a href="#" class="footer-link-sombre">Livraison</a><a href="#" class="footer-link-sombre">Retours</a><a href="apropos.html" class="footer-link-sombre">À Propos</a></div></div>
-                <div><div class="footer-col-title-sombre">Contact</div><div class="footer-links-sombre"><a href="mailto:contact@editionnoire.com" class="footer-link-sombre">contact@editionnoire.com</a><div style="margin-top:15px;display:flex;gap:15px;"><a href="#" class="footer-link-sombre" style="font-size:1.1rem;"><i class="fab fa-instagram"></i></a><a href="#" class="footer-link-sombre" style="font-size:1.1rem;"><i class="fab fa-tiktok"></i></a></div></div></div>
+                <div><div class="footer-col-title-sombre">Contact</div><div class="footer-links-sombre"><a href="mailto:contact@rimkashop.com" class="footer-link-sombre">contact@rimkashop.com</a><div style="margin-top:15px;display:flex;gap:15px;"><a href="#" class="footer-link-sombre" style="font-size:1.1rem;"><i class="fab fa-instagram"></i></a><a href="#" class="footer-link-sombre" style="font-size:1.1rem;"><i class="fab fa-tiktok"></i></a></div></div></div>
             </div>
-            <div class="footer-bottom-sombre"><p>&copy; 2024 Édition Noire. Tous droits réservés.</p></div>
+            <div class="footer-bottom-sombre"><p>&copy; 2024 Rimka Shop. Tous droits réservés.</p></div>
         </div>
     </footer>
 
-    <script>
-        const products = [
-            {id:1,name:"Blazer Structuré Noir",desc:"Blazer en laine mérinos avec coupe architecturale et épaulettes structurées.",category:"femme",price:349.99,oldPrice:null,badge:"NOUVEAU",sizes:["XS","S","M","L","XL"],unavailable:[],image:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=774&auto=format&fit=crop"},
-            {id:2,name:"Robe Soirée Longue",desc:"Robe en satin avec détails métalliques et fente latérale élégante.",category:"femme",price:489.99,oldPrice:589.99,badge:"-20%",sizes:["XS","S","M","L","XL"],unavailable:["XL"],image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=774&auto=format&fit=crop"},
-            {id:3,name:"Costume Sur Mesure",desc:"Costume deux pièces en laine premium avec finitions main.",category:"homme",price:799.99,oldPrice:null,badge:"EXCLUSIF",sizes:["S","M","L","XL","XXL"],unavailable:[],image:"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=776&auto=format&fit=crop"},
-            {id:4,name:"Pull Cashmere Écru",desc:"Pull col roulé en cashmere pur, ultra doux et chaud.",category:"homme",price:279.99,oldPrice:329.99,badge:"-20%",sizes:["S","M","L","XL"],unavailable:["XS"],image:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1064&auto=format&fit=crop"},
-            {id:5,name:"Manteau Enfant Laine",desc:"Manteau en laine vierge avec col en fourrure synthétique.",category:"enfant",price:149.99,oldPrice:null,badge:"NOUVEAU",sizes:["3-4 ans","5-6 ans","7-8 ans","9-10 ans"],unavailable:[],image:"https://images.unsplash.com/photo-1558769132-cb1c458e4222?q=80&w=1480&auto=format&fit=crop"},
-            {id:6,name:"Ensemble Sport Technique",desc:"Survêtement performance avec finitions premium.",category:"enfant",price:99.99,oldPrice:null,badge:null,sizes:["5-6 ans","7-8 ans","9-10 ans","11-12 ans"],unavailable:[],image:"https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=1479&auto=format&fit=crop"},
-            {id:7,name:"Chemise Soie Satinée",desc:"Chemise en soie sauvage avec boutons cachés et col contrasté.",category:"femme",price:219.99,oldPrice:null,badge:"EXCLUSIF",sizes:["XS","S","M","L"],unavailable:["XL"],image:"https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?q=80&w=987&auto=format&fit=crop"},
-            {id:8,name:"Pantalon Tailleur Large",desc:"Pantalon wide-leg en laine et soie avec taille haute.",category:"femme",price:189.99,oldPrice:null,badge:null,sizes:["XS","S","M","L","XL"],unavailable:[],image:"https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1470&auto=format&fit=crop"},
-            {id:9,name:"Chaussures Cuir Verni",desc:"Derbies en cuir pleine fleur verni avec semelle en cuir.",category:"homme",price:379.99,oldPrice:null,badge:"NOUVEAU",sizes:["40","41","42","43","44","45"],unavailable:[],image:"https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1112&auto=format&fit=crop"},
-            {id:10,name:"Sac Main Cuir Texturé",desc:"Sac à main en cuir grainé avec fermoir doré.",category:"femme",price:429.99,oldPrice:499.99,badge:"-20%",sizes:["Unique"],unavailable:[],image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1035&auto=format&fit=crop"},
-            {id:11,name:"Parka Technique",desc:"Parka avec membrane technique et capuche amovible.",category:"homme",price:459.99,oldPrice:null,badge:null,sizes:["S","M","L","XL","XXL"],unavailable:[],image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1035&auto=format&fit=crop"},
-            {id:12,name:"Robe Enfant Velours",desc:"Robe en velours côtelé avec col dentelle.",category:"enfant",price:89.99,oldPrice:109.99,badge:"-20%",sizes:["3-4 ans","5-6 ans","7-8 ans"],unavailable:[],image:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=986&auto=format&fit=crop"},
-        ];
-
-        let cart = JSON.parse(localStorage.getItem('enCart')) || [];
-        let activeFilter = 'all';
-
-        function badgeClass(b){ if(!b)return ''; if(b==='NOUVEAU')return 'badge-new'; if(b.includes('%'))return 'badge-sale'; return 'badge-excl'; }
-
-        function getFiltered() {
-            return products.filter(p => {
-                if(activeFilter==='all') return true;
-                if(activeFilter==='new') return p.badge==='NOUVEAU';
-                if(activeFilter==='sale') return p.oldPrice!==null;
-                if(activeFilter==='exclusive') return p.badge==='EXCLUSIF';
-                return p.category===activeFilter;
-            });
-        }
-
-        function renderProducts(list) {
-            const grid = document.getElementById('productsGrid');
-            grid.innerHTML = '';
-            document.getElementById('resultCount').textContent = list.length;
-            document.getElementById('countDisplay').textContent = list.length + ' produit' + (list.length>1?'s':'');
-            list.forEach((p, i) => {
-                const card = document.createElement('div');
-                card.className = 'product-card hidden-sombre';
-                card.innerHTML = `
-                    <div class="product-img-wrap">
-                        <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy">
-                        ${p.badge ? `<div class="product-badge ${badgeClass(p.badge)}">${p.badge}</div>` : ''}
-                        <div class="product-actions-overlay">
-                            <button class="action-btn" title="Aperçu"><i class="fas fa-eye"></i></button>
-                        </div>
+    <!-- QUICKVIEW MODAL -->
+    <div class="quickview-overlay" id="quickviewOverlay">
+        <div class="quickview-modal" id="quickviewModal">
+            <button class="quickview-close" id="quickviewClose"><i class="fas fa-times"></i></button>
+            <div class="quickview-content">
+                <div class="quickview-img-wrap">
+                    <img src="" alt="" id="qvImage" class="quickview-img">
+                    <div class="quickview-badge" id="qvBadge"></div>
+                </div>
+                <div class="quickview-info">
+                    <div class="quickview-cat" id="qvCat"></div>
+                    <h2 class="quickview-name" id="qvName"></h2>
+                    <div class="quickview-price-row">
+                        <span class="quickview-price" id="qvPrice"></span>
+                        <span class="quickview-old-price" id="qvOldPrice"></span>
                     </div>
-                    <div class="product-info">
-                        <div class="product-cat">${p.category.charAt(0).toUpperCase()+p.category.slice(1)}</div>
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-desc">${p.desc}</div>
-                        <div class="product-price-row">
-                            <div class="product-price">€${p.price.toFixed(2)}</div>
-                            ${p.oldPrice?`<div class="product-price-old">€${p.oldPrice.toFixed(2)}</div>`:''}
-                        </div>
-                        <div class="sizes-row">${p.sizes.map(s=>`<div class="size-chip${p.unavailable.includes(s)?' unavailable':''}">${s}</div>`).join('')}</div>
-                        <button class="add-to-cart-btn" data-id="${p.id}"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
-                    </div>`;
-                grid.appendChild(card);
-                setTimeout(()=>card.classList.add('visible'), i*70);
+                    <p class="quickview-desc" id="qvDesc"></p>
+                    <div>
+                        <div class="quickview-label">TAILLE</div>
+                        <div class="quickview-size-btns" id="qvSizes"></div>
+                    </div>
+                    <button class="quickview-add-btn" id="qvAddBtn"><i class="fas fa-shopping-bag"></i> AJOUTER AU PANIER</button>
+                    <button class="quickview-fav-btn" id="qvFavBtn"><i class="fas fa-heart"></i> AJOUTER AUX FAVORIS</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                // Size selection
-                card.querySelectorAll('.size-chip:not(.unavailable)').forEach(chip=>{
-                    chip.addEventListener('click',()=>{
-                        card.querySelectorAll('.size-chip').forEach(c=>c.classList.remove('selected'));
-                        chip.classList.add('selected');
-                    });
+    <script>
+    // ─────────────────────────────────────────────
+    // CLÉS localStorage
+    // ─────────────────────────────────────────────
+    const STORAGE_CART      = 'rimkaCart';
+    const STORAGE_FAVS      = 'rimkaFavorites';
+    const STORAGE_FAV_SIZES = 'rimkaFavSizes';
+
+    // ─────────────────────────────────────────────
+    // CONFIGURATION PAGINATION
+    // ─────────────────────────────────────────────
+    let currentPage = 1;
+    const productsPerPage = 12; // 12 produits par page
+
+    // ─────────────────────────────────────────────
+    // DONNÉES PRODUITS
+    // ─────────────────────────────────────────────
+    const products = [
+        // HOMME - MALLOTS
+        { uid:'h1', name:"Costume Anthracite", category:"homme", subcategory:"mallots", price:799.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/mallot_0.jpeg", description:"Costume en laine super 120, coupe ajustée." },
+        { uid:'h2', name:"Pull Cashmere Écru", category:"homme", subcategory:"mallots", price:279.99, oldPrice:329.99, badge:"-20%", image:"Collection/mallot_1.jpeg", description:"Pull en cachemire écru, col rond." },
+        { uid:'h3', name:"Chaussures Cuir Verni", category:"homme", subcategory:"mallots", price:379.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/mallot_2.jpeg", description:"Derbies en cuir verni noir, semelle en cuir." },
+        { uid:'h4', name:"Parka Technique", category:"homme", subcategory:"mallots", price:459.99, oldPrice:null, badge:null, image:"Collection/mallot_3.jpeg", description:"Parka déperlant, capuche amovible." },
+        { uid:'h5', name:"Costume Bleu Marine", category:"homme", subcategory:"mallots", price:849.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/mallot_4.jpeg", description:"Costume en laine super 120, coupe ajustée." },
+        { uid:'h6', name:"Pull Cachemire Gris", category:"homme", subcategory:"mallots", price:299.99, oldPrice:349.99, badge:"-20%", image:"Collection/mallot_5.jpeg", description:"Pull en cachemire gris, col V." },
+        { uid:'h7', name:"Mocassins Cuir", category:"homme", subcategory:"mallots", price:329.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/mallot_6.jpeg", description:"Mocassins en cuir souple, semelle cousue." },
+        { uid:'h8', name:"Veste Tweed", category:"homme", subcategory:"mallots", price:529.99, oldPrice:null, badge:null, image:"Collection/mallot_7.jpeg", description:"Veste en tweed écossais, coupe cintrée." },
+        { uid:'h9', name:"Costume Noir", category:"homme", subcategory:"mallots", price:799.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/mallot_8.jpeg", description:"Costume en laine super 120, coupe classique." },
+        { uid:'h10', name:"Pull Cachemire Bordeaux", category:"homme", subcategory:"mallots", price:289.99, oldPrice:339.99, badge:"-20%", image:"Collection/mallot_9.jpeg", description:"Pull en cachemire bordeaux, col roulé." },
+        { uid:'h11', name:"Bottines Cuir", category:"homme", subcategory:"mallots", price:399.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/mallot_10.jpeg", description:"Bottines en cuir pleine fleur, semelle crantée." },
+        { uid:'h12', name:"Blazer Croisé", category:"homme", subcategory:"mallots", price:649.99, oldPrice:null, badge:null, image:"Collection/mallot_11.jpeg", description:"Blazer croisé en laine italienne." },
+        
+        // HOMME - CHAUSSURES
+        { uid:'h13', name:"Derbies Cuir Noir", category:"homme", subcategory:"chaussure", price:379.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/chaussure_1.jpeg", description:"Derbies en cuir noir, semelle en cuir." },
+        { uid:'h14', name:"Bottines Chelsea", category:"homme", subcategory:"chaussure", price:429.99, oldPrice:489.99, badge:"-20%", image:"Collection/chaussure_2.jpeg", description:"Bottines Chelsea en cuir suède." },
+        { uid:'h15', name:"Mocassins Vernis", category:"homme", subcategory:"chaussure", price:349.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/chaussure_3.jpeg", description:"Mocassins en cuir verni bordeaux." },
+        { uid:'h16', name:"Sneakers Premium", category:"homme", subcategory:"chaussure", price:289.99, oldPrice:null, badge:null, image:"Collection/chaussure_4.jpeg", description:"Sneakers en cuir pleine fleur." },
+        { uid:'h17', name:"Richelieu Cuir", category:"homme", subcategory:"chaussure", price:399.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/chaussure_5.jpeg", description:"Richelieu en cuir box, semelle Goodyear." },
+        { uid:'h18', name:"Bottines Montantes", category:"homme", subcategory:"chaussure", price:459.99, oldPrice:529.99, badge:"-20%", image:"Collection/chaussure_6.jpeg", description:"Bottines montantes en cuir texturé." },
+        { uid:'h19', name:"Espadrilles Cuir", category:"homme", subcategory:"chaussure", price:199.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/chaussure_7.jpeg", description:"Espadrilles en cuir souple, semelle corde." },
+        { uid:'h20', name:"Sandales Cuir", category:"homme", subcategory:"chaussure", price:179.99, oldPrice:null, badge:null, image:"Collection/chaussure_8.jpeg", description:"Sandales en cuir, double boucle." },
+        
+        // HOMME - ENSEMBLES
+        { uid:'h21', name:"Costume 3 Pièces", category:"homme", subcategory:"ensembles", price:999.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/ensemble_deux_piece_1.jpeg", description:"Costume 3 pièces en laine super 150." },
+        { uid:'h22', name:"Ensemble Sport", category:"homme", subcategory:"ensembles", price:299.99, oldPrice:349.99, badge:"-20%", image:"Collection/ensemble_deux_piece_2.jpeg", description:"Ensemble sport technique respirant." },
+        { uid:'h23', name:"Ensemble Soirée", category:"homme", subcategory:"ensembles", price:549.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/ensemble_deux_piece_3.jpeg", description:"Ensemble smoking, veste et pantalon." },
+        { uid:'h24', name:"Ensemble Casual", category:"homme", subcategory:"ensembles", price:399.99, oldPrice:null, badge:null, image:"Collection/ensemble_deux_piece_4.jpeg", description:"Blazer et pantalon chino assortis." },
+        { uid:'h25', name:"Costume Croisé", category:"homme", subcategory:"ensembles", price:899.99, oldPrice:null, badge:"EXCLUSIF", image:"Collection/ensemble_deux_piece_5.jpeg", description:"Costume croisé en laine italienne." },
+        { uid:'h26', name:"Ensemble Tweed", category:"homme", subcategory:"ensembles", price:649.99, oldPrice:749.99, badge:"-20%", image:"Collection/ensemble_deux_piece_6.jpeg", description:"Ensemble en tweed écossais." },
+        { uid:'h27', name:"Ensemble Lin", category:"homme", subcategory:"ensembles", price:449.99, oldPrice:null, badge:"NOUVEAU", image:"Collection/ensemble_deux_piece_7.jpeg", description:"Ensemble en lin naturel, coupe décontractée." },
+        { uid:'h28', name:"Ensemble Sport Chic", category:"homme", subcategory:"ensembles", price:379.99, oldPrice:null, badge:null, image:"Collection/ensemble_quatre_piece_1.jpeg", description:"Blazer sport et pantalon slim." },
+        
+
+
+        // HOMME -  T-shirt 
+        { uid:'h47', name:"Costume Anthracite",          category:"homme", subcategory:"t-shirt",    price:799.99, oldPrice:null,   badge:"EXCLUSIF",  image:"Collection/t_shirt_1.jpeg", description:"Costume en laine super 120, coupe ajustée." },
+        { uid:'h38', name:"Pull Cashmere Écru",          category:"homme", subcategory:"t-shirt",       price:279.99, oldPrice:329.99, badge:"-20%",      image:"Collection/t_shirt_2.jpeg", description:"Pull en cachemire écru, col rond." },
+        { uid:'h39', name:"Chaussures Cuir Verni",       category:"homme", subcategory:"t-shirt",  price:379.99, oldPrice:null,   badge:"NOUVEAU",   image:"Collection/t_shirt_2.jpeg", description:"Derbies en cuir verni noir, semelle en cuir." },
+        { uid:'h40', name:"Parka Technique Imperméable", category:"homme", subcategory:"t-shirt",      price:459.99, oldPrice:null,   badge:null,        image:"Collection/t_shirt_3.jpeg", description:"Parka déperlant, capuche amovible." },
+        { uid:'h41', name:"Costume Anthracite",          category:"homme", subcategory:"t-shirt",    price:799.99, oldPrice:null,   badge:"EXCLUSIF",  image:"Collection/t_shirt_4.jpeg", description:"Costume en laine super 120, coupe ajustée." },
+        { uid:'h42', name:"Pull Cashmere Écru",          category:"homme", subcategory:"t-shirt",       price:279.99, oldPrice:329.99, badge:"-20%",      image:"Collection/t_shirt_5.jpeg", description:"Pull en cachemire écru, col rond." },
+        { uid:'h43', name:"Chaussures Cuir Verni",       category:"homme", subcategory:"t-shirt",  price:379.99, oldPrice:null,   badge:"NOUVEAU",   image:"Collection/t_shirt_6.jpeg", description:"Derbies en cuir verni noir, semelle en cuir." },
+        { uid:'h44', name:"Parka Technique Imperméable", category:"homme", subcategory:"t-shirt",      price:459.99, oldPrice:null,   badge:null,        image:"Collection/t_shirt_7.jpeg", description:"Parka déperlant, capuche amovible." },
+        { uid:'h45', name:"Costume Anthracite",          category:"homme", subcategory:"t-shirt",    price:799.99, oldPrice:null,   badge:"EXCLUSIF",  image:"Collection/t_shirt_8.jpeg", description:"Costume en laine super 120, coupe ajustée." },
+        { uid:'h46', name:"Pull Cashmere Écru",          category:"homme", subcategory:"t-shirt",       price:279.99, oldPrice:329.99, badge:"-20%",      image:"Collection/t_shirt_8.jpeg", description:"Pull en cachemire écru, col rond." },
+        
+        
+
+        // FEMME
+        { uid:'f1', name:"Robe Soirée Longue", category:"femme", subcategory:null, price:489.99, oldPrice:589.99, badge:"-20%", image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=774&auto=format&fit=crop", description:"Robe en satin avec détails métalliques." },
+        { uid:'f2', name:"Blazer Structuré", category:"femme", subcategory:null, price:349.99, oldPrice:null, badge:"NOUVEAU", image:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=774&auto=format&fit=crop", description:"Blazer en laine mérinos coupe architecturale." },
+        { uid:'f3', name:"Chemise Soie Satinée", category:"femme", subcategory:null, price:219.99, oldPrice:null, badge:"EXCLUSIF", image:"https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?q=80&w=987&auto=format&fit=crop", description:"Chemise en soie sauvage." },
+        { uid:'f4', name:"Pantalon Tailleur Large", category:"femme", subcategory:null, price:189.99, oldPrice:null, badge:null, image:"https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1470&auto=format&fit=crop", description:"Pantalon wide-leg en laine." },
+        
+        // ENFANT
+        { uid:'e1', name:"Manteau Enfant Laine", category:"enfant", subcategory:null, price:149.99, oldPrice:null, badge:"NOUVEAU", image:"https://images.unsplash.com/photo-1558769132-cb1c458e4222?q=80&w=1480&auto=format&fit=crop", description:"Manteau en laine vierge." },
+        { uid:'e2', name:"Ensemble Sport Enfant", category:"enfant", subcategory:null, price:99.99, oldPrice:null, badge:null, image:"https://images.unsplash.com/photo-1595341888016-a392ef81b7de?q=80&w=1479&auto=format&fit=crop", description:"Survêtement performance." }
+    ];
+
+    const sizesMap = {
+        femme:  ["XS","S","M","L","XL"],
+        homme:  ["S","M","L","XL","XXL"],
+        enfant: ["2 ans","4 ans","6 ans","8 ans","10 ans"]
+    };
+
+    // ─────────────────────────────────────────────
+    // ÉTAT
+    // ─────────────────────────────────────────────
+    let cart      = JSON.parse(localStorage.getItem(STORAGE_CART))      || [];
+    let favorites = JSON.parse(localStorage.getItem(STORAGE_FAVS))      || [];
+    let favSizes  = JSON.parse(localStorage.getItem(STORAGE_FAV_SIZES)) || {};
+    let activeFilter = 'all';
+    let currentQVUid  = null;
+    let currentQVSize = null;
+    
+    // État des filtres
+    let priceMin = null;
+    let priceMax = null;
+    let filters = {
+        inStock: true,
+        promotionsOnly: false,
+        nouveautesOnly: false
+    };
+    
+    // État des sous-catégories (sera rempli dynamiquement)
+    let activeSubcategories = {};
+
+    // ─────────────────────────────────────────────
+    // FONCTION POUR EXTRAIRE LES SOUS-CATÉGORIES UNIQUES
+    // ─────────────────────────────────────────────
+    function getUniqueSubcategories() {
+        const subcategories = new Set();
+        products.forEach(product => {
+            if (product.subcategory && product.subcategory !== null) {
+                subcategories.add(product.subcategory);
+            }
+        });
+        return Array.from(subcategories).sort();
+    }
+
+    // ─────────────────────────────────────────────
+    // FONCTION POUR GÉNÉRER DYNAMIQUEMENT LES FILTRES SOUS-CATÉGORIES
+    // ─────────────────────────────────────────────
+    function generateSubcategoryFilters() {
+        const subcategories = getUniqueSubcategories();
+        const container = document.getElementById('subcategoryFilters');
+        
+        if (subcategories.length === 0) {
+            document.getElementById('subcategoryFilterGroup').style.display = 'none';
+            return;
+        }
+        
+        document.getElementById('subcategoryFilterGroup').style.display = 'block';
+        container.innerHTML = '';
+        
+        // Réinitialiser l'état des sous-catégories
+        subcategories.forEach(subcat => {
+            activeSubcategories[subcat] = true;
+        });
+        
+        // Créer les checkboxes pour chaque sous-catégorie
+        subcategories.forEach(subcat => {
+            const count = products.filter(p => p.subcategory === subcat).length;
+            const displayName = subcat.charAt(0).toUpperCase() + subcat.slice(1);
+            
+            const label = document.createElement('label');
+            label.className = 'checkbox-label';
+            label.innerHTML = `
+                <input type="checkbox" class="subcat-checkbox" data-subcat="${subcat}" checked>
+                ${displayName}
+                <span class="category-stats">${count}</span>
+            `;
+            container.appendChild(label);
+        });
+        
+        // Ajouter les event listeners
+        document.querySelectorAll('.subcat-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const subcat = e.target.dataset.subcat;
+                activeSubcategories[subcat] = e.target.checked;
+            });
+        });
+    }
+
+    // ─────────────────────────────────────────────
+    // HELPERS
+    // ─────────────────────────────────────────────
+    function badgeClass(b){ if(!b)return ''; if(b==='NOUVEAU')return 'badge-new'; if(b.includes('%'))return 'badge-sale'; return 'badge-excl'; }
+    function getByUid(uid){ return products.find(p => p.uid === uid); }
+
+    // ─────────────────────────────────────────────
+    // FONCTION DE FILTRAGE COMPLÈTE
+    // ─────────────────────────────────────────────
+    function getFilteredAndSorted() {
+        let filtered = products.filter(p => {
+            // 1. Filtre par catégorie/badge
+            let categoryMatch = false;
+            switch(activeFilter) {
+                case 'all': categoryMatch = true; break;
+                case 'femme': categoryMatch = p.category === 'femme'; break;
+                case 'homme': categoryMatch = p.category === 'homme'; break;
+                case 'enfant': categoryMatch = p.category === 'enfant'; break;
+                case 'new': categoryMatch = p.badge === 'NOUVEAU'; break;
+                case 'sale': categoryMatch = p.oldPrice !== null; break;
+                case 'exclusive': categoryMatch = p.badge === 'EXCLUSIF'; break;
+                default: categoryMatch = true;
+            }
+            if (!categoryMatch) return false;
+            
+            // 2. Filtre par sous-catégorie
+            if (p.subcategory && activeSubcategories[p.subcategory] !== undefined) {
+                if (!activeSubcategories[p.subcategory]) return false;
+            }
+            
+            // 3. Filtre par prix
+            if (priceMin !== null && p.price < priceMin) return false;
+            if (priceMax !== null && p.price > priceMax) return false;
+            
+            // 4. Filtre disponibilité
+            if (filters.promotionsOnly && p.oldPrice === null) return false;
+            if (filters.nouveautesOnly && p.badge !== 'NOUVEAU') return false;
+            
+            return true;
+        });
+        
+        // 5. Application du tri
+        const sortVal = document.getElementById('sortSelect').value;
+        if (sortVal === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+        if (sortVal === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+        if (sortVal === 'new') filtered = filtered.filter(p => p.badge === 'NOUVEAU').concat(filtered.filter(p => p.badge !== 'NOUVEAU'));
+        
+        return filtered;
+    }
+
+    // ─────────────────────────────────────────────
+    // FONCTION DE PAGINATION
+    // ─────────────────────────────────────────────
+    function updatePagination(totalItems) {
+        const totalPages = Math.ceil(totalItems / productsPerPage);
+        const container = document.getElementById('paginationContainer');
+        
+        if (totalPages <= 1) {
+            container.style.display = 'none';
+            return;
+        }
+        
+        container.style.display = 'flex';
+        container.innerHTML = '';
+        
+        // Bouton précédent
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'page-btn';
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                const filteredProducts = getFilteredAndSorted();
+                renderProducts(filteredProducts);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        container.appendChild(prevBtn);
+        
+        // Numéros de pages
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        if (startPage > 1) {
+            const firstBtn = document.createElement('button');
+            firstBtn.className = 'page-btn';
+            firstBtn.textContent = '1';
+            firstBtn.addEventListener('click', () => {
+                currentPage = 1;
+                const filteredProducts = getFilteredAndSorted();
+                renderProducts(filteredProducts);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            container.appendChild(firstBtn);
+            
+            if (startPage > 2) {
+                const dots = document.createElement('span');
+                dots.className = 'pagination-dots';
+                dots.textContent = '...';
+                container.appendChild(dots);
+            }
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.className = 'page-btn';
+            if (i === currentPage) pageBtn.classList.add('active');
+            pageBtn.textContent = i;
+            pageBtn.addEventListener('click', () => {
+                currentPage = i;
+                const filteredProducts = getFilteredAndSorted();
+                renderProducts(filteredProducts);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            container.appendChild(pageBtn);
+        }
+        
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                const dots = document.createElement('span');
+                dots.className = 'pagination-dots';
+                dots.textContent = '...';
+                container.appendChild(dots);
+            }
+            
+            const lastBtn = document.createElement('button');
+            lastBtn.className = 'page-btn';
+            lastBtn.textContent = totalPages;
+            lastBtn.addEventListener('click', () => {
+                currentPage = totalPages;
+                const filteredProducts = getFilteredAndSorted();
+                renderProducts(filteredProducts);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            container.appendChild(lastBtn);
+        }
+        
+        // Bouton suivant
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'page-btn';
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                const filteredProducts = getFilteredAndSorted();
+                renderProducts(filteredProducts);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        container.appendChild(nextBtn);
+    }
+
+    // ─────────────────────────────────────────────
+    // METTRE À JOUR LES COMPTEURS
+    // ─────────────────────────────────────────────
+    function updateResultsCount(count) {
+        document.getElementById('resultCount').textContent = count;
+        document.getElementById('countDisplay').textContent = count + ' produit' + (count > 1 ? 's' : '');
+    }
+
+    // ─────────────────────────────────────────────
+    // RENDU DES CARTES AVEC PAGINATION
+    // ─────────────────────────────────────────────
+    function renderProducts(list){
+        const grid = document.getElementById('productsGrid');
+        grid.innerHTML = '';
+        
+        // Calcul de la pagination
+        const totalItems = list.length;
+        const totalPages = Math.ceil(totalItems / productsPerPage);
+        
+        // S'assurer que currentPage est valide
+        if (currentPage > totalPages && totalPages > 0) {
+            currentPage = totalPages;
+        }
+        if (currentPage < 1) currentPage = 1;
+        
+        const startIndex = (currentPage - 1) * productsPerPage;
+        const endIndex = startIndex + productsPerPage;
+        const paginatedList = list.slice(startIndex, endIndex);
+        
+        updateResultsCount(totalItems);
+        updatePagination(totalItems);
+        
+        if(paginatedList.length === 0){
+            grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gris-platine);"><i class="fas fa-search" style="font-size:2.5rem;display:block;margin-bottom:16px;color:var(--gris-anthracite);"></i><p>Aucun produit trouvé.</p></div>';
+            return;
+        }
+        
+        paginatedList.forEach((p, i) => {
+            const isFav   = favorites.some(f => f.uid === p.uid);
+            const sizes   = sizesMap[p.category] || [];
+            const card    = document.createElement('div');
+            card.className = 'product-card hidden-sombre';
+            
+            let sizeButtonsHtml = '';
+            sizes.forEach(s => { sizeButtonsHtml += `<button class="size-btn-card" data-size="${s}">${s}</button>`; });
+            
+            card.innerHTML = `
+                <div class="product-img-wrap">
+                    <img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy"
+                         onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=400&auto=format&fit=crop'">
+                    ${p.badge ? `<div class="product-badge ${badgeClass(p.badge)}">${p.badge}</div>` : ''}
+                    <div class="product-actions-overlay">
+                        <button class="action-btn favoris${isFav?' active':''}" data-uid="${p.uid}" title="${isFav?'Retirer des favoris':'Ajouter aux favoris'}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="action-btn quickview-trigger" data-uid="${p.uid}" title="Aperçu rapide">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-cat">${p.category.charAt(0).toUpperCase()+p.category.slice(1)}${p.subcategory ? ' - ' + p.subcategory.charAt(0).toUpperCase()+p.subcategory.slice(1) : ''}</div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-desc">${p.description}</div>
+                    <div class="product-price-row">
+                        <div class="product-price">${p.price.toLocaleString()} CFA</div>
+                        ${p.oldPrice?`<div class="product-price-old">${p.oldPrice.toLocaleString()} CFA</div>`:''}
+                    </div>
+                    <div class="product-size-selector">
+                        <span class="size-label">TAILLE</span>
+                        <div class="size-buttons">${sizeButtonsHtml}</div>
+                    </div>
+                    <button class="add-to-cart-btn" data-uid="${p.uid}"><i class="fas fa-shopping-bag"></i> Ajouter au panier</button>
+                </div>`;
+            
+            grid.appendChild(card);
+            
+            let selectedSize = null;
+            card.querySelectorAll('.size-btn-card').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    card.querySelectorAll('.size-btn-card').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedSize = btn.dataset.size;
                 });
-                card.querySelector('.add-to-cart-btn').addEventListener('click',()=>addToCart(p.id));
             });
+            
+            card.querySelector('.add-to-cart-btn').addEventListener('click', () => addToCart(p.uid, selectedSize));
+            card.querySelector('.favoris').addEventListener('click', e => toggleFavorite(p.uid, e.currentTarget));
+            card.querySelector('.quickview-trigger').addEventListener('click', () => openQuickView(p.uid));
+            
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if(e.isIntersecting){ setTimeout(()=>card.classList.add('visible'), i*70); obs.unobserve(card); }
+                });
+            }, { threshold: 0.05 });
+            obs.observe(card);
+        });
+    }
+
+    // ─────────────────────────────────────────────
+    // RÉINITIALISATION QUAND LES FILTRES CHANGENT
+    // ─────────────────────────────────────────────
+    function refreshProducts() {
+        currentPage = 1;
+        const filteredProducts = getFilteredAndSorted();
+        renderProducts(filteredProducts);
+    }
+
+    // ─────────────────────────────────────────────
+    // BOUTONS DE FILTRE PRINCIPAUX
+    // ─────────────────────────────────────────────
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeFilter = btn.dataset.filter;
+            
+            if (activeFilter === 'new') {
+                filters.nouveautesOnly = false;
+                document.getElementById('newCheckbox').checked = false;
+            }
+            if (activeFilter === 'sale') {
+                filters.promotionsOnly = false;
+                document.getElementById('promoCheckbox').checked = false;
+            }
+            
+            refreshProducts();
+        });
+    });
+
+    // ─────────────────────────────────────────────
+    // FILTRES DE PRIX
+    // ─────────────────────────────────────────────
+    document.getElementById('priceMin').addEventListener('change', (e) => {
+        priceMin = e.target.value ? parseFloat(e.target.value) : null;
+    });
+    document.getElementById('priceMax').addEventListener('change', (e) => {
+        priceMax = e.target.value ? parseFloat(e.target.value) : null;
+    });
+
+    // ─────────────────────────────────────────────
+    // FILTRES DE DISPONIBILITÉ
+    // ─────────────────────────────────────────────
+    document.getElementById('stockCheckbox').addEventListener('change', (e) => {
+        filters.inStock = e.target.checked;
+    });
+    document.getElementById('promoCheckbox').addEventListener('change', (e) => {
+        filters.promotionsOnly = e.target.checked;
+        if (filters.promotionsOnly) {
+            filters.nouveautesOnly = false;
+            document.getElementById('newCheckbox').checked = false;
         }
-
-        // Filters
-        document.querySelectorAll('.filter-btn').forEach(btn=>{
-            btn.addEventListener('click',()=>{
-                document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-                btn.classList.add('active');
-                activeFilter = btn.dataset.filter;
-                renderProducts(getFiltered());
-            });
-        });
-
-        // Sort
-        document.getElementById('sortSelect').addEventListener('change', (e)=>{
-            let list = [...getFiltered()];
-            if(e.target.value==='price-asc') list.sort((a,b)=>a.price-b.price);
-            if(e.target.value==='price-desc') list.sort((a,b)=>b.price-a.price);
-            if(e.target.value==='new') list = list.filter(p=>p.badge==='NOUVEAU').concat(list.filter(p=>p.badge!=='NOUVEAU'));
-            renderProducts(list);
-        });
-
-        // Color filter UI
-        document.querySelectorAll('.color-filter').forEach(c=>{
-            c.addEventListener('click',()=>c.classList.toggle('active'));
-        });
-
-        // Cart
-        function addToCart(id) {
-            const p = products.find(p=>p.id===id);
-            const existing = cart.find(i=>i.id===id);
-            if(existing) existing.quantity++; else cart.push({...p,quantity:1});
-            localStorage.setItem('enCart', JSON.stringify(cart));
-            updateCartCount();
-            showToast(`${p.name} ajouté au panier`);
+    });
+    document.getElementById('newCheckbox').addEventListener('change', (e) => {
+        filters.nouveautesOnly = e.target.checked;
+        if (filters.nouveautesOnly) {
+            filters.promotionsOnly = false;
+            document.getElementById('promoCheckbox').checked = false;
         }
-        function updateCartCount(){const total=cart.reduce((s,i)=>s+i.quantity,0);const el=document.getElementById('cartCount');el.textContent=total;el.style.display=total>0?'flex':'none';}
-        function showToast(msg){document.getElementById('toastMsg').textContent=msg;const t=document.getElementById('toast');t.classList.add('active');setTimeout(()=>t.classList.remove('active'),3000);}
-        function renderCart(){const items=document.getElementById('cartItems');items.innerHTML='';if(cart.length===0){items.innerHTML='<div class="cart-empty-sombre"><i class="fas fa-shopping-bag"></i><p>Votre panier est vide</p></div>';document.getElementById('cartSubtotal').textContent='€0.00';document.getElementById('cartTotal').textContent='€0.00';return;}let subtotal=0;cart.forEach(item=>{subtotal+=item.price*item.quantity;const el=document.createElement('div');el.className='cart-item-sombre';el.innerHTML=`<div class="cart-item-image-sombre"><img src="${item.image}" alt="${item.name}"></div><div class="cart-item-details-sombre"><div class="cart-item-title-sombre">${item.name}</div><div class="cart-item-meta-sombre">Qté: ${item.quantity}</div><div class="cart-item-actions-sombre"><div class="cart-item-quantity-sombre"><button class="quantity-btn-sombre" onclick="updateQty(${item.id},-1)">-</button><span style="color:var(--blanc-creme)">${item.quantity}</span><button class="quantity-btn-sombre" onclick="updateQty(${item.id},1)">+</button></div><div class="cart-item-price-sombre">€${(item.price*item.quantity).toFixed(2)}</div></div></div><button class="remove-item-sombre" onclick="removeItem(${item.id})"><i class="fas fa-times"></i></button>`;items.appendChild(el);});document.getElementById('cartSubtotal').textContent=`€${subtotal.toFixed(2)}`;document.getElementById('cartTotal').textContent=`€${subtotal.toFixed(2)}`;}
-        function updateQty(id,change){const item=cart.find(i=>i.id===id);if(item){item.quantity+=change;if(item.quantity<=0)cart=cart.filter(i=>i.id!==id);}localStorage.setItem('enCart',JSON.stringify(cart));updateCartCount();renderCart();}
-        function removeItem(id){cart=cart.filter(i=>i.id!==id);localStorage.setItem('enCart',JSON.stringify(cart));updateCartCount();renderCart();}
+    });
 
-        document.getElementById('cartIcon').addEventListener('click',()=>{document.getElementById('cartSidebar').classList.add('active');document.getElementById('backdrop').classList.add('active');renderCart();});
-        document.getElementById('closeCart').addEventListener('click',()=>{document.getElementById('cartSidebar').classList.remove('active');document.getElementById('backdrop').classList.remove('active');});
-        document.getElementById('backdrop').addEventListener('click',()=>{document.getElementById('cartSidebar').classList.remove('active');document.getElementById('backdrop').classList.remove('active');});
-        document.getElementById('whatsappOrder').addEventListener('click',()=>{if(cart.length===0)return;const phone="+33123456789";let msg="Bonjour Édition Noire,%0A%0ACommande :%0A";cart.forEach((item,i)=>{msg+=`${i+1}. ${item.name} x${item.quantity} - €${(item.price*item.quantity).toFixed(2)}%0A`;});const total=cart.reduce((s,i)=>s+i.price*i.quantity,0);msg+=`%0ATotal : €${total.toFixed(2)}`;window.open(`https://wa.me/${phone}?text=${msg}`,'_blank');});
+    // ─────────────────────────────────────────────
+    // BOUTON APPLIQUER LES FILTRES
+    // ─────────────────────────────────────────────
+    document.getElementById('applyFiltersBtn').addEventListener('click', () => {
+        refreshProducts();
+        showToast('✅ Filtres appliqués');
+    });
 
-        window.addEventListener('scroll',()=>document.querySelector('.header-sombre').classList.toggle('scrolled',window.scrollY>50));
-        const obs=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible-sombre');}),{threshold:0.1});
-        document.querySelectorAll('.hidden-sombre').forEach(el=>obs.observe(el));
+    // ─────────────────────────────────────────────
+    // TRI
+    // ─────────────────────────────────────────────
+    document.getElementById('sortSelect').addEventListener('change', () => {
+        refreshProducts();
+    });
 
-        renderProducts(products);
+    // ─────────────────────────────────────────────
+    // PANIER (fonctions identiques à avant)
+    // ─────────────────────────────────────────────
+    function addToCart(uid, size=null){
+        const p = getByUid(uid);
+        if(!p) return;
+        const idx = cart.findIndex(i => i.uid===uid && i.size===size);
+        if(idx!==-1){ cart[idx].quantity++; }
+        else { cart.push({uid:p.uid, name:p.name, price:p.price, image:p.image, quantity:1, size:size||null, category:p.category}); }
+        localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
         updateCartCount();
+        const sizeText = size ? ` (taille ${size})` : ' (taille non mentionnée)';
+        showToast(`🛍️ ${p.name}${sizeText} ajouté au panier`);
+    }
+
+    function updateCartCount(){
+        const total = cart.reduce((s,i)=>s+i.quantity,0);
+        const el = document.getElementById('cartCount');
+        el.textContent = total;
+        el.style.display = total>0?'flex':'none';
+    }
+
+    function renderCart(){
+        const container = document.getElementById('cartItems');
+        container.innerHTML = '';
+        if(cart.length===0){
+            container.innerHTML = '<div class="cart-empty-sombre"><i class="fas fa-shopping-bag"></i><p>Votre panier est vide</p></div>';
+            document.getElementById('cartSubtotal').textContent = '0 CFA';
+            document.getElementById('cartTotal').textContent = '0 CFA';
+            return;
+        }
+        let subtotal = 0;
+        cart.forEach((item, idx) => {
+            subtotal += item.price * item.quantity;
+            const product = getByUid(item.uid);
+            const category = product ? product.category : 'homme';
+            const sizes = sizesMap[category] || ["S","M","L","XL"];
+            let sizeOptions = '';
+            sizes.forEach(s => { sizeOptions += `<option value="${s}"${item.size===s?' selected':''}>${s}</option>`; });
+            
+            const el = document.createElement('div');
+            el.className = 'cart-item-sombre';
+            el.innerHTML = `
+                <div class="cart-item-image-sombre">
+                    <img src="${item.image}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=100&auto=format&fit=crop'">
+                </div>
+                <div class="cart-item-details-sombre">
+                    <div class="cart-item-title-sombre">${item.name}</div>
+                    <div style="margin:6px 0;">
+                        <label style="font-size:0.7rem;color:var(--gris-platine);letter-spacing:0.1em;display:block;margin-bottom:4px;">TAILLE</label>
+                        <select class="cart-size-selector" data-index="${idx}">
+                            <option value="">Non mentionnée</option>
+                            ${sizeOptions}
+                        </select>
+                    </div>
+                    <div class="cart-item-actions-sombre">
+                        <div class="cart-item-quantity-sombre">
+                            <button class="quantity-btn-sombre" data-index="${idx}" data-change="-1">−</button>
+                            <span style="color:var(--blanc-creme)">${item.quantity}</span>
+                            <button class="quantity-btn-sombre" data-index="${idx}" data-change="1">+</button>
+                        </div>
+                        <div class="cart-item-price-sombre">${(item.price*item.quantity).toLocaleString()} CFA</div>
+                    </div>
+                </div>
+                <button class="remove-item-sombre" data-index="${idx}"><i class="fas fa-times"></i></button>`;
+            container.appendChild(el);
+        });
+        
+        document.getElementById('cartSubtotal').textContent = `${subtotal.toLocaleString()} CFA`;
+        document.getElementById('cartTotal').textContent = `${subtotal.toLocaleString()} CFA`;
+        
+        container.querySelectorAll('.quantity-btn-sombre').forEach(btn => {
+            btn.addEventListener('click', () => updateQty(parseInt(btn.dataset.index), parseInt(btn.dataset.change)));
+        });
+        container.querySelectorAll('.remove-item-sombre').forEach(btn => {
+            btn.addEventListener('click', () => removeCartItem(parseInt(btn.dataset.index)));
+        });
+        container.querySelectorAll('.cart-size-selector').forEach(select => {
+            select.addEventListener('change', e => updateCartItemSize(parseInt(e.target.dataset.index), e.target.value));
+        });
+    }
+    
+    function updateQty(index, change){
+        if(!cart[index]) return;
+        cart[index].quantity += change;
+        if(cart[index].quantity<=0) cart.splice(index,1);
+        localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+        updateCartCount(); renderCart();
+    }
+    
+    function removeCartItem(index){
+        cart.splice(index,1);
+        localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+        updateCartCount(); renderCart();
+    }
+    
+    function updateCartItemSize(index, newSize){
+        if(!cart[index]) return;
+        const item = cart[index];
+        const oldSize = item.size;
+        const existingIdx = cart.findIndex((ci,i) => i!==index && ci.uid===item.uid && ci.size===(newSize||null));
+        if(existingIdx!==-1){
+            cart[existingIdx].quantity += item.quantity;
+            cart.splice(index,1);
+            showToast(`✅ Tailles fusionnées`);
+        } else {
+            item.size = newSize||null;
+            showToast(`✅ Taille modifiée : ${oldSize||'non mentionnée'} → ${newSize||'non mentionnée'}`);
+        }
+        localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+        updateCartCount(); renderCart();
+    }
+    
+    // ─────────────────────────────────────────────
+    // SIDEBARS
+    // ─────────────────────────────────────────────
+    function openSidebar(id){
+        closeSidebars();
+        document.getElementById(id).classList.add('active');
+        document.getElementById('backdrop').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSidebars(){
+        document.querySelectorAll('.cart-sidebar-sombre, .favorites-sidebar').forEach(s=>s.classList.remove('active'));
+        document.getElementById('backdrop').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    document.getElementById('cartIcon').addEventListener('click', ()=>{ renderCart(); openSidebar('cartSidebar'); });
+    document.getElementById('closeCart').addEventListener('click', closeSidebars);
+    document.getElementById('backdrop').addEventListener('click', closeSidebars);
+    
+    document.getElementById('whatsappOrder').addEventListener('click', ()=>{
+        if(cart.length===0){ showToast('Votre panier est vide'); return; }
+        const phone = "+2250767310852";
+        let msg = "Bonjour Rimka Shop,%0A%0A*Commande :*%0A";
+        cart.forEach((item,i)=>{
+            const sizeText = item.size ? ` (Taille ${item.size})` : ' (Taille non mentionnée)';
+            msg += `${i+1}. *${item.name}*${sizeText} x${item.quantity} - ${(item.price*item.quantity).toLocaleString()} CFA%0A`;
+        });
+        const total = cart.reduce((s,i)=>s+i.price*i.quantity,0);
+        msg += `%0A*Total : ${total.toLocaleString()} CFA*`;
+        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    });
+    
+    // ─────────────────────────────────────────────
+    // FAVORIS
+    // ─────────────────────────────────────────────
+    function toggleFavorite(uid, btn){
+        const p = getByUid(uid);
+        if(!p) return;
+        const exists = favorites.some(f=>f.uid===uid);
+        if(exists){
+            favorites = favorites.filter(f=>f.uid!==uid);
+            delete favSizes[uid];
+            btn.classList.remove('active');
+            btn.title = 'Ajouter aux favoris';
+            showToast(`💔 ${p.name} retiré des favoris`);
+        } else {
+            favorites.push({uid:p.uid, name:p.name, price:p.price, image:p.image, category:p.category});
+            if(!favSizes[uid]) favSizes[uid] = null;
+            btn.classList.add('active');
+            btn.title = 'Retirer des favoris';
+            showToast(`❤️ ${p.name} ajouté aux favoris`);
+        }
+        localStorage.setItem(STORAGE_FAVS, JSON.stringify(favorites));
+        localStorage.setItem(STORAGE_FAV_SIZES, JSON.stringify(favSizes));
+        updateFavCount();
+        document.querySelectorAll(`.action-btn.favoris[data-uid="${uid}"]`).forEach(b=>{
+            b.classList.toggle('active', favorites.some(f=>f.uid===uid));
+        });
+    }
+    
+    function updateFavCount(){
+        const el = document.getElementById('favCount');
+        el.textContent = favorites.length;
+        el.style.display = favorites.length>0?'flex':'none';
+    }
+    
+    function renderFavorites(){
+        const container = document.getElementById('favoritesItems');
+        container.innerHTML = '';
+        if(favorites.length===0){
+            container.innerHTML = '<div class="favorites-empty"><i class="fas fa-heart"></i><p>Aucun favori pour l\'instant</p></div>';
+            return;
+        }
+        favorites.forEach(p=>{
+            const sizes = sizesMap[p.category] || ["S","M","L","XL"];
+            const currentSize = favSizes[p.uid] || null;
+            let sizeBtnsHtml = '';
+            sizes.forEach(s=>{ sizeBtnsHtml += `<button class="fav-size-btn${currentSize===s?' active':''}" data-size="${s}">${s}</button>`; });
+            
+            const el = document.createElement('div');
+            el.className = 'fav-item';
+            el.innerHTML = `
+                <div class="fav-item-img">
+                    <img src="${p.image}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=100&auto=format&fit=crop'">
+                </div>
+                <div class="fav-item-info">
+                    <div class="fav-item-name">${p.name}</div>
+                    <div class="fav-item-price">${p.price.toLocaleString()} CFA</div>
+                    <div class="fav-size-selector">
+                        <span class="fav-size-label">TAILLE</span>
+                        <div class="fav-size-buttons" data-uid="${p.uid}">${sizeBtnsHtml}</div>
+                    </div>
+                    <div class="fav-actions-row">
+                        <button class="fav-add-cart" data-uid="${p.uid}"><i class="fas fa-shopping-bag"></i> Ajouter</button>
+                        <button class="fav-remove" data-uid="${p.uid}"><i class="fas fa-times"></i> Retirer</button>
+                    </div>
+                </div>`;
+            container.appendChild(el);
+        });
+        
+        container.querySelectorAll('.fav-size-btn').forEach(btn=>{
+            btn.addEventListener('click', e=>{
+                e.stopPropagation();
+                const wrap = btn.closest('.fav-size-buttons');
+                const uid = wrap.dataset.uid;
+                wrap.querySelectorAll('.fav-size-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                favSizes[uid] = btn.dataset.size;
+                localStorage.setItem(STORAGE_FAV_SIZES, JSON.stringify(favSizes));
+            });
+        });
+        
+        container.querySelectorAll('.fav-add-cart').forEach(btn=>{
+            btn.addEventListener('click', ()=>{ addToCart(btn.dataset.uid, favSizes[btn.dataset.uid]||null); });
+        });
+        
+        container.querySelectorAll('.fav-remove').forEach(btn=>{
+            btn.addEventListener('click', ()=>removeFavorite(btn.dataset.uid));
+        });
+    }
+    
+    function removeFavorite(uid){
+        favorites = favorites.filter(f=>f.uid!==uid);
+        delete favSizes[uid];
+        localStorage.setItem(STORAGE_FAVS, JSON.stringify(favorites));
+        localStorage.setItem(STORAGE_FAV_SIZES, JSON.stringify(favSizes));
+        updateFavCount();
+        document.querySelectorAll(`.action-btn.favoris[data-uid="${uid}"]`).forEach(b=>b.classList.remove('active'));
+        renderFavorites();
+        showToast('💔 Retiré des favoris');
+    }
+    
+    function addAllFavoritesToCart(){
+        if(favorites.length===0){ showToast('Aucun favori à ajouter'); return; }
+        favorites.forEach(fav=>addToCart(fav.uid, favSizes[fav.uid]||null));
+    }
+    
+    document.getElementById('favIcon').addEventListener('click', ()=>{ renderFavorites(); openSidebar('favoritesSidebar'); });
+    document.getElementById('closeFavorites').addEventListener('click', closeSidebars);
+    document.getElementById('addAllFavoritesToCart').addEventListener('click', addAllFavoritesToCart);
+    
+    // ─────────────────────────────────────────────
+    // QUICK VIEW
+    // ─────────────────────────────────────────────
+    function openQuickView(uid){
+        const p = getByUid(uid);
+        if(!p) return;
+        currentQVUid = uid;
+        currentQVSize = null;
+        document.getElementById('qvImage').src = p.image;
+        document.getElementById('qvImage').alt = p.name;
+        document.getElementById('qvCat').textContent = p.category.toUpperCase() + (p.subcategory ? ' - ' + p.subcategory.toUpperCase() : '');
+        document.getElementById('qvName').textContent = p.name;
+        document.getElementById('qvPrice').textContent = `${p.price.toLocaleString()} CFA`;
+        document.getElementById('qvOldPrice').textContent = p.oldPrice ? `${p.oldPrice.toLocaleString()} CFA` : '';
+        document.getElementById('qvDesc').textContent = p.description;
+        const badge = document.getElementById('qvBadge');
+        badge.textContent = p.badge||'';
+        badge.className = p.badge ? `quickview-badge product-badge ${badgeClass(p.badge)}` : 'quickview-badge';
+        
+        const sizesContainer = document.getElementById('qvSizes');
+        sizesContainer.innerHTML = '';
+        const noSizeBtn = document.createElement('button');
+        noSizeBtn.className = 'size-btn active';
+        noSizeBtn.textContent = 'Non mentionnée';
+        noSizeBtn.addEventListener('click', ()=>{
+            sizesContainer.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+            noSizeBtn.classList.add('active');
+            currentQVSize = null;
+        });
+        sizesContainer.appendChild(noSizeBtn);
+        (sizesMap[p.category]||[]).forEach(s=>{
+            const btn = document.createElement('button');
+            btn.className = 'size-btn';
+            btn.textContent = s;
+            btn.addEventListener('click', ()=>{
+                sizesContainer.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                currentQVSize = s;
+            });
+            sizesContainer.appendChild(btn);
+        });
+        
+        document.getElementById('qvAddBtn').onclick = ()=>{ addToCart(currentQVUid, currentQVSize); closeQuickView(); };
+        
+        const qvFavBtn = document.getElementById('qvFavBtn');
+        const isFav = favorites.some(f=>f.uid===uid);
+        qvFavBtn.classList.toggle('active', isFav);
+        qvFavBtn.innerHTML = isFav
+            ? '<i class="fas fa-heart"></i> RETIRER DES FAVORIS'
+            : '<i class="fas fa-heart"></i> AJOUTER AUX FAVORIS';
+        qvFavBtn.onclick = ()=>toggleFavoriteInQuickView(uid);
+        
+        document.getElementById('quickviewOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function toggleFavoriteInQuickView(uid){
+        const p = getByUid(uid);
+        if(!p) return;
+        const exists = favorites.some(f=>f.uid===uid);
+        const qvFavBtn = document.getElementById('qvFavBtn');
+        if(exists){
+            favorites = favorites.filter(f=>f.uid!==uid);
+            delete favSizes[uid];
+            qvFavBtn.classList.remove('active');
+            qvFavBtn.innerHTML = '<i class="fas fa-heart"></i> AJOUTER AUX FAVORIS';
+            showToast(`💔 ${p.name} retiré des favoris`);
+        } else {
+            favorites.push({uid:p.uid, name:p.name, price:p.price, image:p.image, category:p.category});
+            if(!favSizes[uid]) favSizes[uid] = currentQVSize||null;
+            qvFavBtn.classList.add('active');
+            qvFavBtn.innerHTML = '<i class="fas fa-heart"></i> RETIRER DES FAVORIS';
+            showToast(`❤️ ${p.name} ajouté aux favoris`);
+        }
+        localStorage.setItem(STORAGE_FAVS, JSON.stringify(favorites));
+        localStorage.setItem(STORAGE_FAV_SIZES, JSON.stringify(favSizes));
+        updateFavCount();
+        document.querySelectorAll(`.action-btn.favoris[data-uid="${uid}"]`).forEach(b=>{
+            b.classList.toggle('active', favorites.some(f=>f.uid===uid));
+        });
+        if(document.getElementById('favoritesSidebar').classList.contains('active')) renderFavorites();
+    }
+    
+    function closeQuickView(){
+        document.getElementById('quickviewOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        currentQVUid = currentQVSize = null;
+    }
+    
+    document.getElementById('quickviewClose').addEventListener('click', e=>{ e.stopPropagation(); closeQuickView(); });
+    document.getElementById('quickviewOverlay').addEventListener('click', e=>{ if(e.target===document.getElementById('quickviewOverlay')) closeQuickView(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeQuickView(); });
+    
+    // ─────────────────────────────────────────────
+    // TOAST
+    // ─────────────────────────────────────────────
+    function showToast(msg){
+        document.getElementById('toastMsg').textContent = msg;
+        const t = document.getElementById('toast');
+        t.classList.add('active');
+        setTimeout(()=>t.classList.remove('active'), 3000);
+    }
+    
+    // ─────────────────────────────────────────────
+    // SCROLL & INIT
+    // ─────────────────────────────────────────────
+    window.addEventListener('scroll', ()=>{
+        document.querySelector('.header-sombre').classList.toggle('scrolled', window.scrollY>50);
+    });
+    
+    const bannerObs = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible-sombre'); bannerObs.unobserve(e.target); } });
+    }, { threshold:0.1 });
+    document.querySelectorAll('.hidden-sombre').forEach(el=>bannerObs.observe(el));
+    
+    // Initialisation
+    generateSubcategoryFilters();
+    const initialProducts = getFilteredAndSorted();
+    renderProducts(initialProducts);
+    updateCartCount();
+    updateFavCount();
     </script>
 </body>
 </html>

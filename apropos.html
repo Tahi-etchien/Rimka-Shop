@@ -3,138 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Édition Noire | À Propos</title>
+    <title>Rimka Shop | À Propos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root{--noir-absolu:#0a0a0a;--noir-charbon:#121212;--noir-velours:#1a1a1a;--gris-anthracite:#2a2a2a;--gris-satin:#3a3a3a;--gris-platine:#8a8a8a;--blanc-creme:#f5f3f0;--or-sombre:#b89a5a;--cuivre:#b87333;--radius-sm:4px;--radius-md:8px;--radius-lg:16px;--shadow-subtile:0 4px 20px rgba(0,0,0,0.3);--shadow-eleve:0 12px 40px rgba(0,0,0,0.4);--transition-normal:0.4s cubic-bezier(0.4,0,0.2,1);--transition-fast:0.2s cubic-bezier(0.4,0,0.2,1);--space-sm:20px;--space-md:40px;--space-lg:80px;--space-xl:120px;}
-        *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
-        body{font-family:'Montserrat',sans-serif;color:var(--blanc-creme);background-color:var(--noir-charbon);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-        h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600;line-height:1.2;}
-        a{text-decoration:none;color:inherit;}ul{list-style:none;}
-        .container{width:100%;max-width:1400px;margin:0 auto;padding:0 var(--space-md);}
+        :root {
+            --noir-absolu: #0a0a0a;
+            --noir-charbon: #121212;
+            --noir-velours: #1a1a1a;
+            --gris-anthracite: #2a2a2a;
+            --gris-satin: #3a3a3a;
+            --gris-platine: #8a8a8a;
+            --blanc-creme: #f5f3f0;
+            --or-sombre: #b89a5a;
+            --cuivre: #b87333;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-subtile: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-eleve: 0 12px 40px rgba(0,0,0,0.4);
+            --transition-normal: 0.4s cubic-bezier(0.4,0,0.2,1);
+            --transition-fast: 0.2s cubic-bezier(0.4,0,0.2,1);
+            --space-sm: 20px;
+            --space-md: 40px;
+            --space-lg: 80px;
+            --space-xl: 120px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--blanc-creme);
+            background-color: var(--noir-charbon);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.2; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); }
 
         /* HEADER */
-        .header-sombre{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:var(--space-sm) 0;background-color:rgba(10,10,10,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(42,42,42,0.5);transition:all var(--transition-fast);}
-        .header-sombre.scrolled{padding:12px 0;background-color:rgba(10,10,10,0.98);border-bottom:1px solid var(--gris-anthracite);}
-        .nav-sombre{display:flex;justify-content:space-between;align-items:center;}
-        .logo-sombre{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--blanc-creme);position:relative;display:inline-block;letter-spacing:1px;}
-        .logo-sombre:after{content:'';position:absolute;bottom:2px;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--or-sombre),transparent);}
-        .nav-menu-sombre{display:flex;align-items:center;gap:var(--space-md);}
-        .nav-link-sombre{font-weight:500;font-size:0.9rem;letter-spacing:0.05em;text-transform:uppercase;padding:8px 0;position:relative;transition:color var(--transition-fast);color:var(--gris-platine);}
-        .nav-link-sombre:after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--or-sombre),var(--cuivre));transition:width var(--transition-normal);}
-        .nav-link-sombre:hover,.nav-link-sombre.active{color:var(--blanc-creme);}
-        .nav-link-sombre:hover:after,.nav-link-sombre.active:after{width:100%;}
-        .nav-actions-sombre{display:flex;align-items:center;gap:var(--space-sm);}
-        .nav-icon-sombre{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background-color:transparent;transition:all var(--transition-fast);position:relative;border:1px solid transparent;cursor:pointer;}
-        .nav-icon-sombre:hover{background-color:rgba(42,42,42,0.5);border-color:var(--gris-anthracite);transform:translateY(-2px);}
-        .cart-count-sombre{position:absolute;top:-3px;right:-3px;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);font-size:0.7rem;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;font-weight:700;}
+        .header-sombre {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: var(--space-sm) 0;
+            background-color: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(42,42,42,0.5);
+            transition: all var(--transition-fast);
+        }
+        .header-sombre.scrolled {
+            padding: 12px 0;
+            background-color: rgba(10,10,10,0.98);
+            border-bottom: 1px solid var(--gris-anthracite);
+        }
+        .nav-sombre { display: flex; justify-content: space-between; align-items: center; }
+        .logo-sombre {
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
+            color: var(--blanc-creme); position: relative; display: inline-block; letter-spacing: 1px;
+        }
+        .logo-sombre:after {
+            content: ''; position: absolute; bottom: 2px; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, var(--or-sombre), transparent);
+        }
+        .nav-menu-sombre { display: flex; align-items: center; gap: var(--space-md); }
+        .nav-link-sombre {
+            font-weight: 500; font-size: 0.9rem; letter-spacing: 0.05em;
+            text-transform: uppercase; padding: 8px 0; position: relative;
+            transition: color var(--transition-fast); color: var(--gris-platine);
+        }
+        .nav-link-sombre:after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: linear-gradient(90deg, var(--or-sombre), var(--cuivre));
+            transition: width var(--transition-normal);
+        }
+        .nav-link-sombre:hover, .nav-link-sombre.active { color: var(--blanc-creme); }
+        .nav-link-sombre:hover:after, .nav-link-sombre.active:after { width: 100%; }
+        .nav-actions-sombre {
+            display: flex; align-items: center; gap: var(--space-sm);
+        }
+        .nav-icon-sombre {
+            width: 42px; height: 42px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background-color: transparent; transition: all var(--transition-fast);
+            position: relative; border: 1px solid transparent; cursor: pointer;
+        }
+        .nav-icon-sombre:hover {
+            background-color: rgba(42,42,42,0.5);
+            border-color: var(--gris-anthracite);
+            transform: translateY(-2px);
+        }
+        .cart-count-sombre {
+            position: absolute; top: -3px; right: -3px;
+            background: linear-gradient(135deg, var(--or-sombre), var(--cuivre));
+            color: var(--noir-absolu); font-size: 0.7rem;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center; font-weight: 700;
+        }
+        .fav-count {
+            position: absolute; top: -3px; right: -3px;
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: #fff; font-size: 0.7rem;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center; font-weight: 700;
+        }
 
         /* HERO CINÉMATIQUE */
-        .hero-about{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding-bottom:var(--space-xl);}
-        .hero-about-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--noir-absolu) 0%,var(--gris-anthracite) 100%);}
-        .hero-about-bg img{width:100%;height:100%;object-fit:cover;opacity:0.3;filter:grayscale(30%);}
-        .hero-about-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.3) 50%,transparent 100%);}
-        .hero-about-content{position:relative;z-index:2;max-width:800px;}
-        .hero-about-eyebrow{font-size:0.8rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--or-sombre);margin-bottom:var(--space-sm);display:flex;align-items:center;gap:15px;}
-        .hero-about-eyebrow:before{content:'';width:40px;height:1px;background:var(--or-sombre);}
-        .hero-about-title{font-size:5rem;line-height:1;margin-bottom:var(--space-md);background:linear-gradient(135deg,var(--blanc-creme) 0%,var(--or-sombre) 60%,var(--cuivre) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-        .hero-about-subtitle{font-size:1.2rem;color:var(--gris-platine);max-width:600px;line-height:1.8;}
+        .hero-about {
+            height: 100vh; min-height: 700px; position: relative; overflow: hidden;
+            display: flex; align-items: flex-end; padding-bottom: var(--space-xl);
+        }
+        .hero-about-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--noir-absolu) 0%, var(--gris-anthracite) 100%); }
+        .hero-about-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(30%); }
+        .hero-about-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 50%, transparent 100%);
+        }
+        .hero-about-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero-about-eyebrow {
+            font-size: 0.8rem; letter-spacing: 0.4em; text-transform: uppercase;
+            color: var(--or-sombre); margin-bottom: var(--space-sm);
+            display: flex; align-items: center; gap: 15px;
+        }
+        .hero-about-eyebrow:before { content: ''; width: 40px; height: 1px; background: var(--or-sombre); }
+        .hero-about-title {
+            font-size: 5rem; line-height: 1; margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--blanc-creme) 0%, var(--or-sombre) 60%, var(--cuivre) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-about-subtitle {
+            font-size: 1.2rem; color: var(--gris-platine); max-width: 600px; line-height: 1.8;
+        }
 
         /* SECTION GÉNÉRIQUE */
-        .section-ap{padding:var(--space-xl) 0;}
-        .section-label{font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--or-sombre);margin-bottom:var(--space-sm);display:flex;align-items:center;gap:12px;}
-        .section-label:before{content:'';width:30px;height:1px;background:var(--or-sombre);}
-        .section-h2{font-size:3rem;margin-bottom:var(--space-md);background:linear-gradient(135deg,var(--blanc-creme) 0%,var(--or-sombre) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-        .body-text{color:var(--gris-platine);line-height:1.9;font-size:1rem;}
-        .body-text + .body-text{margin-top:var(--space-sm);}
+        .section-ap { padding: var(--space-xl) 0; }
+        .section-label {
+            font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase;
+            color: var(--or-sombre); margin-bottom: var(--space-sm);
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-label:before { content: ''; width: 30px; height: 1px; background: var(--or-sombre); }
+        .section-h2 {
+            font-size: 3rem; margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--blanc-creme) 0%, var(--or-sombre) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .body-text { color: var(--gris-platine); line-height: 1.9; font-size: 1rem; }
+        .body-text + .body-text { margin-top: var(--space-sm); }
 
         /* HISTOIRE SPLIT */
-        .histoire-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center;}
-        .histoire-img{border-radius:var(--radius-lg);overflow:hidden;height:600px;position:relative;border:1px solid rgba(184,154,90,0.2);}
-        .histoire-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8);}
-        .histoire-img-caption{position:absolute;bottom:0;left:0;right:0;padding:var(--space-md);background:linear-gradient(to top,rgba(10,10,10,0.9),transparent);font-size:0.85rem;color:var(--or-sombre);letter-spacing:0.05em;}
-        .annee-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);padding:8px 20px;border-radius:50px;font-size:0.85rem;color:var(--or-sombre);margin-bottom:var(--space-md);}
+        .histoire-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
+        .histoire-img {
+            border-radius: var(--radius-lg); overflow: hidden; height: 500px; position: relative;
+            border: 1px solid rgba(184,154,90,0.2);
+        }
+        .histoire-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
+        .histoire-img-caption {
+            position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-md);
+            background: linear-gradient(to top, rgba(10,10,10,0.9), transparent);
+            font-size: 0.85rem; color: var(--or-sombre); letter-spacing: 0.05em;
+        }
+        .annee-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(184,154,90,0.1); border: 1px solid rgba(184,154,90,0.3);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.85rem;
+            color: var(--or-sombre); margin-bottom: var(--space-md);
+        }
 
         /* VALEURS */
-        .valeurs-section{background:var(--noir-absolu);padding:var(--space-xl) 0;}
-        .valeurs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg);}
-        .valeur-card{padding:var(--space-md);border-radius:var(--radius-md);background:linear-gradient(135deg,var(--noir-velours),var(--gris-anthracite));border:1px solid rgba(42,42,42,0.5);transition:all var(--transition-normal);position:relative;overflow:hidden;}
-        .valeur-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-eleve);border-color:rgba(184,154,90,0.3);}
-        .valeur-card:before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:linear-gradient(180deg,var(--or-sombre),var(--cuivre));transition:height var(--transition-normal);}
-        .valeur-card:hover:before{height:100%;}
-        .valeur-icon{width:60px;height:60px;border-radius:50%;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);display:flex;align-items:center;justify-content:center;color:var(--or-sombre);font-size:1.3rem;margin-bottom:var(--space-md);}
-        .valeur-title{font-size:1.3rem;margin-bottom:var(--space-sm);}
-        .valeur-text{color:var(--gris-platine);font-size:0.9rem;line-height:1.7;}
+        .valeurs-section { background: var(--noir-absolu); padding: var(--space-xl) 0; }
+        .valeurs-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        .valeur-card {
+            padding: var(--space-md); border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--noir-velours), var(--gris-anthracite));
+            border: 1px solid rgba(42,42,42,0.5); transition: all var(--transition-normal);
+            position: relative; overflow: hidden;
+        }
+        .valeur-card:hover {
+            transform: translateY(-8px); box-shadow: var(--shadow-eleve);
+            border-color: rgba(184,154,90,0.3);
+        }
+        .valeur-card:before {
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+            background: linear-gradient(180deg, var(--or-sombre), var(--cuivre));
+            transition: height var(--transition-normal);
+        }
+        .valeur-card:hover:before { height: 100%; }
+        .valeur-icon {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: rgba(184,154,90,0.1); border: 1px solid rgba(184,154,90,0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--or-sombre); font-size: 1.3rem; margin-bottom: var(--space-md);
+        }
+        .valeur-title { font-size: 1.3rem; margin-bottom: var(--space-sm); }
+        .valeur-text { color: var(--gris-platine); font-size: 0.9rem; line-height: 1.7; }
 
-        /* CHIFFRES */
-        .stats-strip{padding:var(--space-lg) 0;border-top:1px solid var(--gris-anthracite);border-bottom:1px solid var(--gris-anthracite);}
-        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:var(--space-md);}
-        .stat-item{}
-        .stat-number{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;background:linear-gradient(135deg,var(--blanc-creme),var(--or-sombre));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
-        .stat-label{font-size:0.85rem;color:var(--gris-platine);letter-spacing:0.05em;margin-top:8px;}
-        .stat-divider{width:1px;background:var(--gris-anthracite);margin:0 auto;}
+        /* STATS STRIP */
+        .stats-strip { padding: var(--space-lg) 0; border-top: 1px solid var(--gris-anthracite); border-bottom: 1px solid var(--gris-anthracite); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: var(--space-md); }
+        .stat-number {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--blanc-creme), var(--or-sombre));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            line-height: 1;
+        }
+        .stat-label { font-size: 0.85rem; color: var(--gris-platine); letter-spacing: 0.05em; margin-top: 8px; }
 
         /* TIMELINE */
-        .timeline{position:relative;padding:var(--space-lg) 0;}
-        .timeline:before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--or-sombre),transparent);transform:translateX(-50%);}
-        .timeline-item{display:grid;grid-template-columns:1fr 60px 1fr;gap:var(--space-md);align-items:center;margin-bottom:var(--space-lg);}
-        .timeline-item:nth-child(even) .timeline-text{order:-1;text-align:right;}
-        .timeline-item:nth-child(even) .timeline-empty{order:0;}
-        .timeline-item:nth-child(odd) .timeline-text{order:2;}
-        .timeline-dot{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));border:3px solid var(--noir-charbon);box-shadow:0 0 20px rgba(184,154,90,0.4);justify-self:center;position:relative;z-index:1;}
-        .timeline-year{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--or-sombre);margin-bottom:8px;}
-        .timeline-title{font-size:1.1rem;margin-bottom:8px;}
-        .timeline-desc{font-size:0.9rem;color:var(--gris-platine);line-height:1.6;}
+        .timeline { position: relative; padding: var(--space-lg) 0; }
+        .timeline:before {
+            content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+            width: 1px; background: linear-gradient(180deg, transparent, var(--or-sombre), transparent);
+            transform: translateX(-50%);
+        }
+        .timeline-item { display: grid; grid-template-columns: 1fr 60px 1fr; gap: var(--space-md); align-items: center; margin-bottom: var(--space-lg); }
+        .timeline-item:nth-child(even) .timeline-text { order: -1; text-align: right; }
+        .timeline-item:nth-child(odd) .timeline-text { order: 2; }
+        .timeline-dot {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--or-sombre), var(--cuivre));
+            border: 3px solid var(--noir-charbon); box-shadow: 0 0 20px rgba(184,154,90,0.4);
+            justify-self: center; position: relative; z-index: 1;
+        }
+        .timeline-year { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--or-sombre); margin-bottom: 8px; }
+        .timeline-title { font-size: 1.1rem; margin-bottom: 8px; }
+        .timeline-desc { font-size: 0.9rem; color: var(--gris-platine); line-height: 1.6; }
 
-        /* ÉQUIPE (fond sobre) */
-        .equipe-section{padding:var(--space-xl) 0;}
-        .equipe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg);}
-        .membre-card{text-align:center;}
-        .membre-img{width:160px;height:160px;border-radius:50%;margin:0 auto var(--space-sm);overflow:hidden;border:2px solid rgba(184,154,90,0.3);position:relative;}
-        .membre-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);}
-        .membre-img:after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent;background:linear-gradient(135deg,var(--or-sombre),var(--cuivre)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;opacity:0;transition:opacity var(--transition-fast);}
-        .membre-card:hover .membre-img:after{opacity:1;}
-        .membre-name{font-size:1.2rem;font-family:'Playfair Display',serif;margin-bottom:4px;}
-        .membre-role{font-size:0.8rem;color:var(--or-sombre);letter-spacing:0.1em;text-transform:uppercase;}
+        /* ÉQUIPE */
+        .equipe-section { padding: var(--space-xl) 0; }
+        .equipe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-top: var(--space-lg); }
+        .membre-card { text-align: center; }
+        .membre-img {
+            width: 200px; height: 200px; border-radius: 50%; margin: 0 auto var(--space-sm);
+            overflow: hidden; border: 2px solid rgba(184,154,90,0.3); position: relative;
+        }
+        .membre-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
+        .membre-img:after {
+            content: ''; position: absolute; inset: 0; border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, var(--or-sombre), var(--cuivre)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out; mask-composite: exclude;
+            opacity: 0; transition: opacity var(--transition-fast);
+        }
+        .membre-card:hover .membre-img:after { opacity: 1; }
+        .membre-name { font-size: 1.3rem; font-family: 'Playfair Display', serif; margin-bottom: 6px; }
+        .membre-role { font-size: 0.85rem; color: var(--or-sombre); letter-spacing: 0.1em; text-transform: uppercase; }
 
         /* CONTACT */
-        .contact-section{padding:var(--space-xl) 0;background:var(--noir-absolu);}
-        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;}
-        .contact-info{display:flex;flex-direction:column;gap:var(--space-md);}
-        .contact-item{display:flex;gap:var(--space-sm);align-items:flex-start;}
-        .contact-icon{width:50px;height:50px;border-radius:50%;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);display:flex;align-items:center;justify-content:center;color:var(--or-sombre);font-size:1.1rem;flex-shrink:0;}
-        .contact-item-title{font-weight:600;margin-bottom:4px;}
-        .contact-item-text{color:var(--gris-platine);font-size:0.9rem;}
-        .contact-form{display:flex;flex-direction:column;gap:var(--space-sm);}
-        .form-group{display:flex;flex-direction:column;gap:8px;}
-        .form-label{font-size:0.85rem;font-weight:500;color:var(--gris-platine);letter-spacing:0.05em;}
-        .form-input,.form-textarea{background:var(--noir-velours);border:1px solid var(--gris-anthracite);color:var(--blanc-creme);padding:14px 18px;border-radius:var(--radius-sm);font-size:0.9rem;outline:none;transition:border-color var(--transition-fast);font-family:'Montserrat',sans-serif;}
-        .form-input:focus,.form-textarea:focus{border-color:var(--or-sombre);}
-        .form-textarea{min-height:140px;resize:vertical;}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm);}
-        .submit-btn{background:linear-gradient(135deg,var(--or-sombre),var(--cuivre));color:var(--noir-absolu);border:none;padding:16px 40px;border-radius:var(--radius-sm);font-weight:700;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all var(--transition-fast);display:flex;align-items:center;gap:10px;width:fit-content;}
-        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(184,154,90,0.3);}
-        .social-links{display:flex;gap:var(--space-sm);margin-top:var(--space-sm);}
-        .social-link{width:44px;height:44px;border-radius:50%;background:rgba(184,154,90,0.1);border:1px solid rgba(184,154,90,0.3);display:flex;align-items:center;justify-content:center;color:var(--or-sombre);font-size:1.1rem;transition:all var(--transition-fast);}
-        .social-link:hover{background:var(--or-sombre);color:var(--noir-absolu);transform:translateY(-3px);}
+        .contact-section { padding: var(--space-xl) 0; background: var(--noir-absolu); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: start; }
+        .contact-info { display: flex; flex-direction: column; gap: var(--space-md); }
+        .contact-item { display: flex; gap: var(--space-sm); align-items: flex-start; }
+        .contact-icon {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(184,154,90,0.1); border: 1px solid rgba(184,154,90,0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--or-sombre); font-size: 1.1rem; flex-shrink: 0;
+        }
+        .contact-item-title { font-weight: 600; margin-bottom: 4px; }
+        .contact-item-text { color: var(--gris-platine); font-size: 0.9rem; }
+        .contact-item-text a { color: var(--or-sombre); transition: color var(--transition-fast); }
+        .contact-item-text a:hover { color: var(--blanc-creme); }
+        .contact-form { display: flex; flex-direction: column; gap: var(--space-sm); }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-label { font-size: 0.85rem; font-weight: 500; color: var(--gris-platine); letter-spacing: 0.05em; }
+        .form-input, .form-textarea {
+            background: var(--noir-velours); border: 1px solid var(--gris-anthracite);
+            color: var(--blanc-creme); padding: 14px 18px; border-radius: var(--radius-sm);
+            font-size: 0.9rem; outline: none; transition: border-color var(--transition-fast);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .form-input:focus, .form-textarea:focus { border-color: var(--or-sombre); }
+        .form-textarea { min-height: 140px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+        .submit-btn {
+            background: linear-gradient(135deg, var(--or-sombre), var(--cuivre));
+            color: var(--noir-absolu); border: none; padding: 16px 40px;
+            border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem;
+            letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+            transition: all var(--transition-fast); display: flex; align-items: center;
+            gap: 10px; width: fit-content;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,154,90,0.3); }
+        .social-links { display: flex; gap: var(--space-sm); margin-top: var(--space-sm); }
+        .social-link {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(184,154,90,0.1); border: 1px solid rgba(184,154,90,0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--or-sombre); font-size: 1.1rem; transition: all var(--transition-fast);
+        }
+        .social-link:hover {
+            background: var(--or-sombre); color: var(--noir-absolu);
+            transform: translateY(-3px);
+        }
 
         /* FOOTER */
-        .footer-sombre{background:linear-gradient(180deg,var(--noir-absolu) 0%,#080808 100%);padding:var(--space-xl) 0 var(--space-md);border-top:1px solid var(--gris-anthracite);}
-        .footer-grid-sombre{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);}
-        .footer-col-title-sombre{font-size:1.1rem;margin-bottom:var(--space-md);position:relative;padding-bottom:10px;}
-        .footer-col-title-sombre:after{content:'';position:absolute;bottom:0;left:0;width:40px;height:1px;background:linear-gradient(90deg,var(--or-sombre),transparent);}
-        .footer-links-sombre{display:flex;flex-direction:column;gap:12px;}
-        .footer-link-sombre{color:var(--gris-platine);font-size:0.9rem;transition:all var(--transition-fast);}
-        .footer-link-sombre:hover{color:var(--or-sombre);transform:translateX(5px);}
-        .footer-bottom-sombre{text-align:center;padding-top:var(--space-md);border-top:1px solid var(--gris-anthracite);color:var(--gris-platine);font-size:0.85rem;}
+        .footer-sombre {
+            background: linear-gradient(180deg, var(--noir-absolu) 0%, #080808 100%);
+            padding: var(--space-xl) 0 var(--space-md);
+            border-top: 1px solid var(--gris-anthracite);
+        }
+        .footer-grid-sombre {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg); margin-bottom: var(--space-xl);
+        }
+        .footer-col-title-sombre {
+            font-size: 1.1rem; margin-bottom: var(--space-md);
+            position: relative; padding-bottom: 10px;
+        }
+        .footer-col-title-sombre:after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 40px; height: 1px;
+            background: linear-gradient(90deg, var(--or-sombre), transparent);
+        }
+        .footer-links-sombre { display: flex; flex-direction: column; gap: 12px; }
+        .footer-link-sombre {
+            color: var(--gris-platine); font-size: 0.9rem;
+            transition: all var(--transition-fast);
+        }
+        .footer-link-sombre:hover { color: var(--or-sombre); transform: translateX(5px); }
+        .footer-bottom-sombre {
+            text-align: center; padding-top: var(--space-md);
+            border-top: 1px solid var(--gris-anthracite);
+            color: var(--gris-platine); font-size: 0.85rem;
+        }
 
-        .hidden-sombre{opacity:0;transform:translateY(30px);transition:all var(--transition-normal);}
-        .visible-sombre{opacity:1;transform:translateY(0);}
-        @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+        /* BACKDROP & SIDEBARS */
+        .backdrop-sombre {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7); z-index: 1500;
+            opacity: 0; visibility: hidden; transition: all var(--transition-normal);
+            backdrop-filter: blur(5px);
+        }
+        .backdrop-sombre.active { opacity: 1; visibility: visible; }
+        
+        .cart-sidebar-sombre {
+            position: fixed; top: 0; right: -450px; width: 100%; max-width: 400px; height: 100%;
+            background: linear-gradient(135deg, var(--noir-absolu), var(--noir-charbon));
+            z-index: 2000; transition: right var(--transition-normal);
+            display: flex; flex-direction: column;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+            border-left: 1px solid var(--gris-anthracite);
+        }
+        .cart-sidebar-sombre.active { right: 0; }
+        .cart-header-sombre {
+            padding: var(--space-md); border-bottom: 1px solid var(--gris-anthracite);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .cart-title-sombre {
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--blanc-creme), var(--or-sombre));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .close-cart-sombre {
+            background: rgba(42,42,42,0.5); border: 1px solid var(--gris-anthracite);
+            font-size: 1.2rem; cursor: pointer; color: var(--gris-platine);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        .close-cart-sombre:hover { color: var(--blanc-creme); background: var(--gris-anthracite); transform: rotate(90deg); }
+        .cart-items-sombre { flex: 1; padding: var(--space-md); overflow-y: auto; }
+        .cart-empty-sombre { text-align: center; padding: 60px 20px; color: var(--gris-platine); }
+        .cart-empty-sombre i { font-size: 3rem; margin-bottom: 20px; color: var(--gris-anthracite); display: block; }
+        .cart-item-sombre { display: flex; padding: var(--space-sm) 0; border-bottom: 1px solid var(--gris-anthracite); gap: var(--space-sm); }
+        .cart-item-image-sombre { width: 80px; height: 100px; border-radius: var(--radius-sm); flex-shrink: 0; overflow: hidden; border: 1px solid var(--gris-anthracite); }
+        .cart-item-image-sombre img { width: 100%; height: 100%; object-fit: cover; }
+        .cart-item-details-sombre { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .cart-item-title-sombre { font-weight: 600; font-size: 0.95rem; margin-bottom: 5px; }
+        .cart-item-size-sombre { font-size: 0.8rem; color: var(--or-sombre); margin-bottom: 5px; font-weight: 500; }
+        .cart-item-actions-sombre { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+        .cart-item-quantity-sombre { display: flex; align-items: center; gap: 10px; }
+        .quantity-btn-sombre {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--gris-anthracite); border: 1px solid var(--gris-satin);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: 600; transition: all var(--transition-fast);
+            color: var(--blanc-creme);
+        }
+        .quantity-btn-sombre:hover { background: var(--or-sombre); color: var(--noir-absolu); border-color: var(--or-sombre); }
+        .cart-item-price-sombre { font-weight: 700; color: var(--or-sombre); }
+        .remove-item-sombre { color: #ff6b6b; background: none; border: none; cursor: pointer; font-size: 1rem; padding: 5px; transition: transform var(--transition-fast); }
+        .remove-item-sombre:hover { transform: scale(1.2); }
+        .cart-footer-sombre {
+            padding: var(--space-md); border-top: 1px solid var(--gris-anthracite);
+            background: rgba(10,10,10,0.9);
+        }
+        .cart-totals-sombre { margin-bottom: var(--space-md); }
+        .cart-total-row-sombre { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: var(--gris-platine); }
+        .cart-total-final-sombre { font-size: 1.2rem; font-weight: 700; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--gris-anthracite); color: var(--blanc-creme); }
+        .whatsapp-order-sombre {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            width: 100%; background: linear-gradient(135deg, #25D366, #1DA851);
+            color: var(--noir-absolu); border: none; padding: 18px; border-radius: var(--radius-sm);
+            font-weight: 700; font-size: 0.95rem; cursor: pointer;
+            transition: all var(--transition-normal); text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .whatsapp-order-sombre:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37,211,102,0.3); }
 
-        @media(max-width:992px){.nav-menu-sombre{display:none;}.histoire-grid,.contact-grid{grid-template-columns:1fr;}.valeurs-grid{grid-template-columns:1fr 1fr;}.timeline:before{left:20px;}.timeline-item{grid-template-columns:40px 1fr;}.timeline-item:nth-child(even) .timeline-text{order:2;text-align:left;}.timeline-empty{display:none;}.equipe-grid{grid-template-columns:repeat(2,1fr);}.footer-grid-sombre{grid-template-columns:repeat(2,1fr);}.stats-grid{grid-template-columns:repeat(2,1fr);}}
-        @media(max-width:768px){.hero-about-title{font-size:3rem;}.section-h2{font-size:2.2rem;}.valeurs-grid{grid-template-columns:1fr;}.equipe-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}}
+        .favorites-sidebar {
+            position: fixed; top: 0; right: -450px; width: 100%; max-width: 400px; height: 100%;
+            background: linear-gradient(135deg, var(--noir-absolu), var(--noir-charbon));
+            z-index: 2000; transition: right var(--transition-normal);
+            display: flex; flex-direction: column;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+            border-left: 1px solid var(--gris-anthracite);
+        }
+        .favorites-sidebar.active { right: 0; }
+        .favorites-header {
+            padding: var(--space-md); border-bottom: 1px solid var(--gris-anthracite);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .favorites-title {
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--blanc-creme), #ff4d6d);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .close-favorites {
+            background: rgba(42,42,42,0.5); border: 1px solid var(--gris-anthracite);
+            font-size: 1.2rem; cursor: pointer; color: var(--gris-platine);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        .close-favorites:hover { color: var(--blanc-creme); background: var(--gris-anthracite); transform: rotate(90deg); }
+        .favorites-items { flex: 1; padding: var(--space-md); overflow-y: auto; }
+        .favorites-empty { text-align: center; padding: 60px 20px; color: var(--gris-platine); }
+        .favorites-empty i { font-size: 3rem; margin-bottom: 20px; color: var(--gris-anthracite); display: block; }
+        .fav-item {
+            display: flex; gap: var(--space-sm); padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--gris-anthracite); align-items: flex-start;
+        }
+        .fav-item-img { width: 70px; height: 90px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0; border: 1px solid var(--gris-anthracite); }
+        .fav-item-img img { width: 100%; height: 100%; object-fit: cover; }
+        .fav-item-info { flex: 1; }
+        .fav-item-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+        .fav-item-price { font-size: 0.9rem; color: var(--or-sombre); font-weight: 700; margin-bottom: 12px; }
+        .fav-size-selector { margin-bottom: 12px; }
+        .fav-size-label { font-size: 0.65rem; color: var(--gris-platine); letter-spacing: 0.1em; margin-bottom: 8px; display: block; }
+        .fav-size-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+        .fav-size-btn {
+            padding: 4px 10px; border-radius: var(--radius-sm);
+            border: 1px solid var(--gris-anthracite); background: var(--noir-velours);
+            color: var(--gris-platine); font-size: 0.7rem; font-weight: 500;
+            cursor: pointer; transition: all var(--transition-fast);
+        }
+        .fav-size-btn:hover { border-color: var(--or-sombre); color: var(--blanc-creme); }
+        .fav-size-btn.active { background: linear-gradient(135deg, var(--or-sombre), var(--cuivre)); color: var(--noir-absolu); border-color: transparent; }
+        .fav-actions-row { display: flex; gap: 8px; margin-top: 8px; }
+        .fav-add-cart {
+            flex: 1; background: linear-gradient(135deg, var(--or-sombre), var(--cuivre));
+            color: var(--noir-absolu); border: none; padding: 8px 10px; border-radius: var(--radius-sm);
+            font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .fav-add-cart:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(184,154,90,0.3); }
+        .fav-remove {
+            background: linear-gradient(135deg, #ff4d6d, #c9184a);
+            color: #fff; border: none; padding: 8px 10px; border-radius: var(--radius-sm);
+            font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .fav-remove:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,77,109,0.3); }
+        .add-all-to-cart-btn {
+            background: linear-gradient(135deg, var(--or-sombre), var(--cuivre));
+            color: var(--noir-absolu); border: none; padding: 14px;
+            border-radius: var(--radius-sm); font-weight: 700; font-size: 0.85rem;
+            cursor: pointer; transition: all 0.2s; width: 100%;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .add-all-to-cart-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,154,90,0.3); }
+
+        .toast-sombre {
+            position: fixed; bottom: 30px; right: 30px;
+            background: linear-gradient(135deg, var(--noir-velours), var(--gris-anthracite));
+            color: var(--blanc-creme); padding: 16px 24px; border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-eleve); z-index: 5000;
+            display: flex; align-items: center; gap: 12px;
+            transform: translateY(100px); opacity: 0;
+            transition: all var(--transition-normal);
+            border: 1px solid var(--gris-anthracite);
+        }
+        .toast-sombre.active { transform: translateY(0); opacity: 1; }
+        .toast-icon-sombre { color: var(--or-sombre); font-size: 1.2rem; }
+
+        .hidden-sombre { opacity: 0; transform: translateY(30px); transition: all var(--transition-normal); }
+        .visible-sombre { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 992px) {
+            .nav-menu-sombre { display: none; }
+            .histoire-grid, .contact-grid { grid-template-columns: 1fr; }
+            .valeurs-grid { grid-template-columns: 1fr 1fr; }
+            .timeline:before { left: 20px; }
+            .timeline-item { grid-template-columns: 40px 1fr; }
+            .timeline-item:nth-child(even) .timeline-text { order: 2; text-align: left; }
+            .timeline-empty { display: none; }
+            .equipe-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid-sombre { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .hero-about-title { font-size: 3rem; }
+            .section-h2 { font-size: 2.2rem; }
+            .valeurs-grid { grid-template-columns: 1fr; }
+            .equipe-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -142,7 +525,7 @@
     <header class="header-sombre">
         <div class="container">
             <nav class="nav-sombre">
-                <a href="index.html" class="logo-sombre">ÉDITION NOIRE</a>
+                <a href="index.html" class="logo-sombre">RIMKA SHOP</a>
                 <ul class="nav-menu-sombre">
                     <li><a href="index.html" class="nav-link-sombre">Accueil</a></li>
                     <li><a href="collections.html" class="nav-link-sombre">Collections</a></li>
@@ -150,23 +533,68 @@
                     <li><a href="apropos.html" class="nav-link-sombre active">À Propos</a></li>
                 </ul>
                 <div class="nav-actions-sombre">
-                    <div class="nav-icon-sombre" id="cartIcon"><i class="fas fa-shopping-bag"></i><span class="cart-count-sombre" id="cartCount">0</span></div>
+                    <div class="nav-icon-sombre" id="favIcon" style="position:relative;">
+                        <i class="fas fa-heart"></i>
+                        <span class="fav-count" id="favCount">0</span>
+                    </div>
+                    <div class="nav-icon-sombre" id="cartIcon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count-sombre" id="cartCount">0</span>
+                    </div>
                 </div>
             </nav>
         </div>
     </header>
 
+    <div class="backdrop-sombre" id="backdrop"></div>
+    <div class="toast-sombre" id="toast"><i class="fas fa-check-circle toast-icon-sombre"></i><span id="toastMsg">Produit ajouté au panier</span></div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar-sombre" id="cartSidebar">
+        <div class="cart-header-sombre">
+            <h3 class="cart-title-sombre">Votre Sélection</h3>
+            <button class="close-cart-sombre" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items-sombre" id="cartItems">
+            <div class="cart-empty-sombre"><i class="fas fa-shopping-bag"></i><p>Votre panier est vide</p></div>
+        </div>
+        <div class="cart-footer-sombre">
+            <div class="cart-totals-sombre">
+                <div class="cart-total-row-sombre"><span>Sous-total</span><span id="cartSubtotal">0 CFA</span></div>
+                <div class="cart-total-row-sombre"><span>Livraison</span><span>Gratuite</span></div>
+                <div class="cart-total-row-sombre cart-total-final-sombre"><span>Total</span><span id="cartTotal">0 CFA</span></div>
+            </div>
+            <button class="whatsapp-order-sombre" id="whatsappOrder"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- FAVORIS SIDEBAR -->
+    <div class="favorites-sidebar" id="favoritesSidebar">
+        <div class="favorites-header">
+            <h3 class="favorites-title">Mes Favoris</h3>
+            <button class="close-favorites" id="closeFavorites"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="favorites-items" id="favoritesItems">
+            <div class="favorites-empty"><i class="fas fa-heart"></i><p>Aucun favori pour l'instant</p></div>
+        </div>
+        <div class="cart-footer-sombre">
+            <button class="add-all-to-cart-btn" id="addAllFavoritesToCart">
+                <i class="fas fa-shopping-bag"></i> Ajouter tous au panier
+            </button>
+        </div>
+    </div>
+
     <!-- HERO -->
     <section class="hero-about">
         <div class="hero-about-bg">
-            <img src="https://images.unsplash.com/photo-1558769132-cb1c458e4222?q=80&w=1470&auto=format&fit=crop" alt="">
+            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1470&auto=format&fit=crop" alt="Rimka Shop">
         </div>
         <div class="hero-about-overlay"></div>
         <div class="container">
             <div class="hero-about-content">
                 <div class="hero-about-eyebrow">Notre Histoire</div>
-                <h1 class="hero-about-title">L'Art de<br>l'Élégance Sombre</h1>
-                <p class="hero-about-subtitle">Depuis 2018, Édition Noire redéfinit les codes du luxe avec une vision singulière : faire de l'obscurité une force, du minimalisme une déclaration.</p>
+                <h1 class="hero-about-title">L'Art du Style<br>au Quotidien</h1>
+                <p class="hero-about-subtitle">Un vêtement est parfois le point de départ de la réalisation d'un rêve. Chez Rimka Shop, nous croyons que la mode est bien plus qu'un simple habit.</p>
             </div>
         </div>
     </section>
@@ -176,16 +604,16 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item hidden-sombre">
-                    <div class="stat-number">2018</div>
-                    <div class="stat-label">Année de fondation</div>
+                    <div class="stat-number">2025</div>
+                    <div class="stat-label">Année de création</div>
                 </div>
                 <div class="stat-item hidden-sombre">
-                    <div class="stat-number">290</div>
-                    <div class="stat-label">Pièces par collection</div>
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Articles dans nos collections</div>
                 </div>
                 <div class="stat-item hidden-sombre">
-                    <div class="stat-number">12K+</div>
-                    <div class="stat-label">Clients fidèles</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Service client disponible</div>
                 </div>
                 <div class="stat-item hidden-sombre">
                     <div class="stat-number">3</div>
@@ -200,16 +628,16 @@
         <div class="container">
             <div class="histoire-grid">
                 <div class="hidden-sombre">
-                    <div class="annee-tag"><i class="fas fa-clock"></i> Fondée en 2018</div>
+                    <div class="annee-tag"><i class="fas fa-calendar-alt"></i> Créée en 2025</div>
                     <div class="section-label">Notre Histoire</div>
-                    <h2 class="section-h2">Une vision née de l'ombre</h2>
-                    <p class="body-text">Édition Noire est née d'une conviction simple : la mode la plus puissante est celle qui n'a pas peur de l'obscurité. Fondée à Paris en 2018 par Léa Fontaine et Marc Aurélius, la maison s'est imposée comme une référence du luxe sombre et épuré.</p>
-                    <p class="body-text" style="margin-top:var(--space-sm);">Chaque collection est pensée comme une édition limitée, un objet éditorial autant que vestimentaire. Nous refusons la surproduction et privilégions la qualité absolue des matières, des coupes, des finitions.</p>
-                    <p class="body-text" style="margin-top:var(--space-sm);">Aujourd'hui, Édition Noire habille une clientèle mondiale qui partage cette esthétique : sobre, précise, intemporelle. Une garde-robe qui traverse les saisons sans jamais vieillir.</p>
+                    <h2 class="section-h2">Une vision née à Abidjan</h2>
+                    <p class="body-text">Rimka Shop est née d'une conviction simple : la mode doit être accessible à tous sans compromis sur la qualité. Fondée à Abidjan en août 2025 par Rimka Segongo, la boutique s'est rapidement imposée comme une référence pour ceux qui recherchent des pièces tendance, durables et abordables.</p>
+                    <p class="body-text" style="margin-top:var(--space-sm);">Notre philosophie est simple : offrir des vêtements qui permettent à chacun d'exprimer sa personnalité. Nous sélectionnons avec soin chaque pièce pour garantir un style unique, des matières de qualité et un confort optimal.</p>
+                    <p class="body-text" style="margin-top:var(--space-sm);">En septembre 2025, grâce à une visibilité accrue et à la confiance grandissante de nos clients, nous avons élargi notre offre. En mars 2026, nous avons franchi une nouvelle étape avec le lancement de notre site web, pour permettre à toute la Côte d'Ivoire de découvrir nos collections.</p>
                 </div>
                 <div class="histoire-img hidden-sombre">
-                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=870&auto=format&fit=crop" alt="Histoire de la marque">
-                    <div class="histoire-img-caption">Atelier Édition Noire — Paris, 2018</div>
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop" alt="Rimka Shop - Boutique">
+                    <div class="histoire-img-caption">Rimka Shop — Abidjan, 2025</div>
                 </div>
             </div>
         </div>
@@ -219,15 +647,15 @@
     <section class="section-ap" style="background:var(--noir-absolu);">
         <div class="container">
             <div style="text-align:center;margin-bottom:var(--space-lg);">
-                <div class="section-label" style="justify-content:center;">Nos étapes</div>
-                <h2 class="section-h2" style="text-align:center;">Le parcours</h2>
+                <div class="section-label" style="justify-content:center;">Notre parcours</div>
+                <h2 class="section-h2" style="text-align:center;">L'évolution de Rimka Shop</h2>
             </div>
             <div class="timeline">
                 <div class="timeline-item hidden-sombre">
                     <div class="timeline-text">
-                        <div class="timeline-year">2018</div>
-                        <div class="timeline-title">Création de la maison</div>
-                        <div class="timeline-desc">Léa Fontaine et Marc Aurélius fondent Édition Noire à Paris, avec une première collection capsule de 12 pièces.</div>
+                        <div class="timeline-year">Août 2025</div>
+                        <div class="timeline-title">Création de Rimka Shop</div>
+                        <div class="timeline-desc">Rimka Segongo fonde Rimka Shop à Abidjan avec la volonté de proposer des vêtements de qualité accessibles à tous.</div>
                     </div>
                     <div class="timeline-dot"></div>
                     <div></div>
@@ -236,28 +664,19 @@
                     <div></div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-text">
-                        <div class="timeline-year">2019</div>
-                        <div class="timeline-title">Lancement de la ligne Homme</div>
-                        <div class="timeline-desc">Face au succès de la collection Femme, la maison étend son univers avec une ligne masculine taillée dans les mêmes exigences.</div>
+                        <div class="timeline-year">Septembre 2025</div>
+                        <div class="timeline-title">Amélioration de la visibilité</div>
+                        <div class="timeline-desc">Augmentation de la notoriété et des premiers clients fidèles. La communauté Rimka Shop grandit.</div>
                     </div>
                 </div>
                 <div class="timeline-item hidden-sombre">
                     <div class="timeline-text">
-                        <div class="timeline-year">2021</div>
-                        <div class="timeline-title">Collection Enfant & boutique en ligne</div>
-                        <div class="timeline-desc">Ouverture de la boutique digitale et naissance de la ligne Enfant, pour transmettre l'élégance dès le plus jeune âge.</div>
+                        <div class="timeline-year">Mars 2026</div>
+                        <div class="timeline-title">Lancement du site web</div>
+                        <div class="timeline-desc">Ouverture de la boutique en ligne pour offrir une expérience d'achat moderne et accessible partout en Côte d'Ivoire.</div>
                     </div>
                     <div class="timeline-dot"></div>
                     <div></div>
-                </div>
-                <div class="timeline-item hidden-sombre">
-                    <div></div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-text">
-                        <div class="timeline-year">2024</div>
-                        <div class="timeline-title">290 pièces & expansion internationale</div>
-                        <div class="timeline-desc">La collection atteint 290 pièces et la clientèle s'étend à plus de 40 pays. Édition Noire s'affirme comme une référence mondiale.</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -273,64 +692,54 @@
             <div class="valeurs-grid">
                 <div class="valeur-card hidden-sombre">
                     <div class="valeur-icon"><i class="fas fa-gem"></i></div>
-                    <h3 class="valeur-title">Qualité Absolue</h3>
-                    <p class="valeur-text">Chaque pièce est confectionnée dans les matières les plus nobles — laine mérinos, soie, cashmere, cuir pleine fleur. Nous ne transigeons jamais sur la qualité.</p>
+                    <h3 class="valeur-title">Qualité</h3>
+                    <p class="valeur-text">Des vêtements durables et bien finis. Nous sélectionnons des matières nobles et des finitions soignées pour que chaque pièce résiste au temps.</p>
                 </div>
                 <div class="valeur-card hidden-sombre">
-                    <div class="valeur-icon"><i class="fas fa-leaf"></i></div>
-                    <h3 class="valeur-title">Durabilité</h3>
-                    <p class="valeur-text">Contre la fast fashion, nous produisons des pièces pensées pour durer. Nos collections capsules limitées garantissent une production raisonnée et responsable.</p>
+                    <div class="valeur-icon"><i class="fas fa-tag"></i></div>
+                    <h3 class="valeur-title">Accessibilité</h3>
+                    <p class="valeur-text">Des prix abordables pour tous. Nous croyons que le style ne doit pas être un luxe réservé à une élite.</p>
                 </div>
                 <div class="valeur-card hidden-sombre">
-                    <div class="valeur-icon"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3 class="valeur-title">Artisanat</h3>
-                    <p class="valeur-text">Nos ateliers parisiens perpétuent les traditions de la haute couture. Chaque couture, chaque bouton, chaque finition est réalisé à la main avec une précision absolue.</p>
+                    <div class="valeur-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="valeur-title">Style Unique</h3>
+                    <p class="valeur-text">Des pièces tendance et originales pour vous aider à exprimer votre personnalité et vous démarquer.</p>
                 </div>
                 <div class="valeur-card hidden-sombre">
-                    <div class="valeur-icon"><i class="fas fa-eye"></i></div>
-                    <h3 class="valeur-title">Esthétique Singulière</h3>
-                    <p class="valeur-text">Nous défendons une vision : la beauté dans l'ombre. Une palette sombre, des coupes architecturales, un minimalisme qui dit plus que n'importe quelle ostentation.</p>
+                    <div class="valeur-icon"><i class="fas fa-handshake"></i></div>
+                    <h3 class="valeur-title">Confiance</h3>
+                    <p class="valeur-text">Une relation de confiance avec nos clients. La transparence et l'honnêteté sont au cœur de notre relation client.</p>
                 </div>
                 <div class="valeur-card hidden-sombre">
                     <div class="valeur-icon"><i class="fas fa-heart"></i></div>
-                    <h3 class="valeur-title">Inclusivité</h3>
-                    <p class="valeur-text">Du XS au XXL, de 3 ans à l'âge adulte — l'élégance n'a pas de frontières. Nos collections sont pensées pour toutes les morphologies et tous les âges.</p>
+                    <h3 class="valeur-title">Passion</h3>
+                    <p class="valeur-text">La mode comme vecteur de rêves. Chaque vêtement que nous proposons est choisi avec passion.</p>
                 </div>
                 <div class="valeur-card hidden-sombre">
-                    <div class="valeur-icon"><i class="fas fa-infinity"></i></div>
-                    <h3 class="valeur-title">Intemporalité</h3>
-                    <p class="valeur-text">Nous ne créons pas des tendances, nous créons des classiques. Chaque pièce Édition Noire est pensée pour traverser les décennies sans jamais se démoder.</p>
+                    <div class="valeur-icon"><i class="fas fa-comments"></i></div>
+                    <h3 class="valeur-title">Proximité</h3>
+                    <p class="valeur-text">Un service personnalisé et à l'écoute. Nous sommes disponibles 24h/24 et 7j/7 pour répondre à vos besoins.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ÉQUIPE -->
+    <!-- ÉQUIPE
     <section class="equipe-section">
         <div class="container">
             <div style="text-align:center;margin-bottom:var(--space-lg);">
-                <div class="section-label" style="justify-content:center;">Les visages</div>
-                <h2 class="section-h2" style="text-align:center;">Notre Équipe</h2>
+                <div class="section-label" style="justify-content:center;">Le fondateur</div>
+                <h2 class="section-h2" style="text-align:center;">Derrière Rimka Shop</h2>
             </div>
             <div class="equipe-grid">
                 <div class="membre-card hidden-sombre">
-                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Léa Fontaine"></div>
-                    <div class="membre-name">Léa Fontaine</div>
-                    <div class="membre-role">Directrice Artistique & Co-fondatrice</div>
-                </div>
-                <div class="membre-card hidden-sombre">
-                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Marc Aurélius"></div>
-                    <div class="membre-name">Marc Aurélius</div>
-                    <div class="membre-role">Directeur Général & Co-fondateur</div>
-                </div>
-                <div class="membre-card hidden-sombre">
-                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Sophie Renard"></div>
-                    <div class="membre-name">Sophie Renard</div>
-                    <div class="membre-role">Responsable Création</div>
+                    <div class="membre-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop&fit=faces" alt="Rimka Segongo"></div>
+                    <div class="membre-name">Rimka Segongo</div>
+                    <div class="membre-role">Fondateur & Créateur</div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- CONTACT -->
     <section class="contact-section" id="contact">
@@ -345,56 +754,55 @@
                         <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
                             <div class="contact-item-title">Adresse</div>
-                            <div class="contact-item-text">123 Avenue Montaigne<br>75008 Paris, France</div>
+                            <div class="contact-item-text">Abidjan, Côte d'Ivoire</div>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <div>
                             <div class="contact-item-title">Email</div>
-                            <div class="contact-item-text"><a href="mailto:contact@editionnoire.com" style="color:var(--or-sombre);">contact@editionnoire.com</a></div>
+                            <div class="contact-item-text"><a href="mailto:GHJ@gmail.com">GHJ@gmail.com</a></div>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-phone"></i></div>
                         <div>
                             <div class="contact-item-title">Téléphone</div>
-                            <div class="contact-item-text"><a href="tel:+33123456789" style="color:var(--or-sombre);">+33 1 23 45 67 89</a></div>
+                            <div class="contact-item-text"><a href="tel:+225355677789">+225 35 56 77 789</a></div>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-clock"></i></div>
                         <div>
                             <div class="contact-item-title">Horaires</div>
-                            <div class="contact-item-text">Lun – Ven : 10h – 19h<br>Sam : 11h – 18h</div>
+                            <div class="contact-item-text">24h/24 — 7 jours sur 7</div>
                         </div>
                     </div>
                     <div>
                         <div class="contact-item-title" style="margin-bottom:var(--space-sm);">Suivez-nous</div>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                             <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form hidden-sombre">
                     <div class="form-row">
-                        <div class="form-group"><label class="form-label">Prénom</label><input type="text" class="form-input" placeholder="Votre prénom"></div>
-                        <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" placeholder="Votre nom"></div>
+                        <div class="form-group"><label class="form-label">Prénom</label><input type="text" class="form-input" id="firstName" placeholder="Votre prénom"></div>
+                        <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" id="lastName" placeholder="Votre nom"></div>
                     </div>
-                    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="votre@email.com"></div>
+                    <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="email" placeholder="votre@email.com"></div>
                     <div class="form-group"><label class="form-label">Sujet</label>
-                        <select class="form-input">
+                        <select class="form-input" id="subject">
                             <option>Commande & livraison</option>
                             <option>Retours & échanges</option>
-                            <option>Presse & partenariat</option>
+                            <option>Partenariat</option>
                             <option>Autre</option>
                         </select>
                     </div>
-                    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Votre message..."></textarea></div>
-                    <button class="submit-btn" onclick="handleSubmit()"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+                    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" id="message" placeholder="Votre message..."></textarea></div>
+                    <button class="submit-btn" id="submitForm"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
                 </div>
             </div>
         </div>
@@ -404,32 +812,334 @@
     <footer class="footer-sombre">
         <div class="container">
             <div class="footer-grid-sombre">
-                <div><div class="footer-col-title-sombre">ÉDITION NOIRE</div><p style="color:var(--gris-platine);font-size:0.9rem;line-height:1.6;">Une vision sombre et raffinée de la mode. Chaque pièce est une déclaration d'élégance intemporelle.</p></div>
+                <div><div class="footer-col-title-sombre">RIMKA SHOP</div><p style="color:var(--gris-platine);font-size:0.9rem;line-height:1.6;">Un vêtement est parfois le point de départ de la réalisation d'un rêve. Mode accessible, style unique.</p></div>
                 <div><div class="footer-col-title-sombre">Boutique</div><div class="footer-links-sombre"><a href="boutique.html" class="footer-link-sombre">Tous les produits</a><a href="collections.html" class="footer-link-sombre">Collections</a></div></div>
-                <div><div class="footer-col-title-sombre">Informations</div><div class="footer-links-sombre"><a href="#" class="footer-link-sombre">Livraison</a><a href="#" class="footer-link-sombre">Retours</a><a href="apropos.html" class="footer-link-sombre">À Propos</a></div></div>
-                <div><div class="footer-col-title-sombre">Contact</div><div class="footer-links-sombre"><a href="mailto:contact@editionnoire.com" class="footer-link-sombre">contact@editionnoire.com</a><a href="tel:+33123456789" class="footer-link-sombre">+33 1 23 45 67 89</a></div></div>
+                <div><div class="footer-col-title-sombre">Informations</div><div class="footer-links-sombre"><a href="#" class="footer-link-sombre">Livraison gratuite (Yopougon)</a><a href="#" class="footer-link-sombre">Retours</a><a href="apropos.html" class="footer-link-sombre">À Propos</a></div></div>
+                <div><div class="footer-col-title-sombre">Contact</div><div class="footer-links-sombre"><a href="mailto:GHJ@gmail.com" class="footer-link-sombre">GHJ@gmail.com</a><a href="tel:+225355677789" class="footer-link-sombre">+225 35 56 77 789</a></div></div>
             </div>
-            <div class="footer-bottom-sombre"><p>&copy; 2024 Édition Noire. Tous droits réservés.</p></div>
+            <div class="footer-bottom-sombre"><p>&copy; 2026 Rimka Shop. Tous droits réservés. | Abidjan, Côte d'Ivoire</p></div>
         </div>
     </footer>
 
     <script>
-        // Header scroll
-        window.addEventListener('scroll',()=>document.querySelector('.header-sombre').classList.toggle('scrolled',window.scrollY>50));
-        // Scroll animations
-        const obs=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible-sombre');}),{threshold:0.1});
-        document.querySelectorAll('.hidden-sombre').forEach(el=>obs.observe(el));
+        // =============================================
+        // STOCKAGE HARMONISÉ - Mêmes clés que les autres pages
+        // =============================================
+        const STORAGE_CART = 'rimkaCart';
+        const STORAGE_FAVS = 'rimkaFavorites';
+        const STORAGE_FAV_SIZES = 'rimkaFavSizes';
 
-        // Cart from localStorage
-        let cart = JSON.parse(localStorage.getItem('enCart')) || [];
-        function updateCartCount(){const total=cart.reduce((s,i)=>s+i.quantity,0);const el=document.getElementById('cartCount');el.textContent=total;el.style.display=total>0?'flex':'none';}
-        document.getElementById('cartIcon').addEventListener('click',()=>{window.location.href='boutique.html';});
-        updateCartCount();
+        // ======== ÉTAT ========
+        let cart = JSON.parse(localStorage.getItem(STORAGE_CART)) || [];
+        let favorites = JSON.parse(localStorage.getItem(STORAGE_FAVS)) || [];
+        let favSizes = JSON.parse(localStorage.getItem(STORAGE_FAV_SIZES)) || {};
 
-        // Form
-        function handleSubmit(){
-            alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+        // Tailles disponibles
+        const sizesMap = {
+            "Homme": ["S", "M", "L", "XL", "XXL"],
+            "Femme": ["XS", "S", "M", "L", "XL"],
+            "Enfant": ["2 ans", "4 ans", "6 ans", "8 ans", "10 ans"]
+        };
+
+        // ======== FONCTIONS PANIER ========
+        function updateCartCount() {
+            const total = cart.reduce((s, i) => s + i.quantity, 0);
+            const el = document.getElementById('cartCount');
+            if (el) {
+                el.textContent = total;
+                el.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
+
+        function renderCart() {
+            const itemsContainer = document.getElementById('cartItems');
+            if (!itemsContainer) return;
+            
+            itemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<div class="cart-empty-sombre"><i class="fas fa-shopping-bag"></i><p>Votre panier est vide</p></div>';
+                document.getElementById('cartSubtotal').textContent = '0 CFA';
+                document.getElementById('cartTotal').textContent = '0 CFA';
+                return;
+            }
+            let subtotal = 0;
+            cart.forEach((item, idx) => {
+                subtotal += item.price * item.quantity;
+                const el = document.createElement('div');
+                el.className = 'cart-item-sombre';
+                el.innerHTML = `
+                    <div class="cart-item-image-sombre"><img src="${item.image}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=100&auto=format&fit=crop'"></div>
+                    <div class="cart-item-details-sombre">
+                        <div class="cart-item-title-sombre">${item.name}</div>
+                        ${item.size ? `<div class="cart-item-size-sombre">Taille : ${item.size}</div>` : '<div class="cart-item-size-sombre">Taille : non mentionnée</div>'}
+                        <div class="cart-item-actions-sombre">
+                            <div class="cart-item-quantity-sombre">
+                                <button class="quantity-btn-sombre" data-index="${idx}" data-change="-1">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn-sombre" data-index="${idx}" data-change="1">+</button>
+                            </div>
+                            <div class="cart-item-price-sombre">${(item.price * item.quantity).toLocaleString()} CFA</div>
+                        </div>
+                    </div>
+                    <button class="remove-item-sombre" data-index="${idx}"><i class="fas fa-times"></i></button>`;
+                itemsContainer.appendChild(el);
+            });
+            document.getElementById('cartSubtotal').textContent = `${subtotal.toLocaleString()} CFA`;
+            document.getElementById('cartTotal').textContent = `${subtotal.toLocaleString()} CFA`;
+            
+            itemsContainer.querySelectorAll('.quantity-btn-sombre').forEach(btn => {
+                btn.addEventListener('click', () => updateQty(parseInt(btn.dataset.index), parseInt(btn.dataset.change)));
+            });
+            itemsContainer.querySelectorAll('.remove-item-sombre').forEach(btn => {
+                btn.addEventListener('click', () => removeCartItem(parseInt(btn.dataset.index)));
+            });
+        }
+
+        function updateQty(index, change) {
+            if (!cart[index]) return;
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) cart.splice(index, 1);
+            localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        function removeCartItem(index) {
+            cart.splice(index, 1);
+            localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+        }
+
+        // ======== FONCTIONS FAVORIS ========
+        function updateFavCount() {
+            const el = document.getElementById('favCount');
+            if (el) {
+                el.textContent = favorites.length;
+                el.style.display = favorites.length > 0 ? 'flex' : 'none';
+            }
+        }
+
+        function renderFavorites() {
+            const container = document.getElementById('favoritesItems');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            if (favorites.length === 0) {
+                container.innerHTML = '<div class="favorites-empty"><i class="fas fa-heart"></i><p>Aucun favori pour l\'instant</p></div>';
+                return;
+            }
+            
+            favorites.forEach(p => {
+                const sizes = sizesMap[p.category === 'homme' ? 'Homme' : p.category === 'femme' ? 'Femme' : 'Enfant'] || ["S", "M", "L", "XL"];
+                const currentSize = favSizes[p.uid] || null;
+                
+                let sizeButtonsHtml = '';
+                sizes.forEach(size => {
+                    sizeButtonsHtml += `<button class="fav-size-btn ${currentSize === size ? 'active' : ''}" data-size="${size}">${size}</button>`;
+                });
+                
+                const el = document.createElement('div');
+                el.className = 'fav-item';
+                el.innerHTML = `
+                    <div class="fav-item-img">
+                        <img src="${p.image}" alt="${p.name}">
+                    </div>
+                    <div class="fav-item-info">
+                        <div class="fav-item-name">${p.name}</div>
+                        <div class="fav-item-price">${p.price.toLocaleString()} CFA</div>
+                        <div class="fav-size-selector">
+                            <div class="fav-size-label">TAILLE</div>
+                            <div class="fav-size-buttons" data-uid="${p.uid}">
+                                ${sizeButtonsHtml}
+                            </div>
+                        </div>
+                        <div class="fav-actions-row">
+                            <button class="fav-add-cart" data-uid="${p.uid}">
+                                <i class="fas fa-shopping-bag"></i> Ajouter
+                            </button>
+                            <button class="fav-remove" data-uid="${p.uid}">
+                                <i class="fas fa-times"></i> Retirer
+                            </button>
+                        </div>
+                    </div>`;
+                container.appendChild(el);
+            });
+            
+            container.querySelectorAll('.fav-size-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const wrap = btn.closest('.fav-size-buttons');
+                    const uid = wrap.dataset.uid;
+                    wrap.querySelectorAll('.fav-size-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    favSizes[uid] = btn.dataset.size;
+                    localStorage.setItem(STORAGE_FAV_SIZES, JSON.stringify(favSizes));
+                });
+            });
+            
+            container.querySelectorAll('.fav-add-cart').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const uid = btn.dataset.uid;
+                    const size = favSizes[uid] || null;
+                    const p = favorites.find(f => f.uid === uid);
+                    if (p) {
+                        const existingIndex = cart.findIndex(i => i.uid === uid && i.size === size);
+                        if (existingIndex !== -1) {
+                            cart[existingIndex].quantity++;
+                        } else {
+                            cart.push({ uid: p.uid, name: p.name, price: p.price, image: p.image, quantity: 1, size: size || null });
+                        }
+                        localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+                        updateCartCount();
+                        showToast(`🛍️ ${p.name} ajouté au panier`);
+                    }
+                });
+            });
+            
+            container.querySelectorAll('.fav-remove').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const uid = btn.dataset.uid;
+                    favorites = favorites.filter(f => f.uid !== uid);
+                    delete favSizes[uid];
+                    localStorage.setItem(STORAGE_FAVS, JSON.stringify(favorites));
+                    localStorage.setItem(STORAGE_FAV_SIZES, JSON.stringify(favSizes));
+                    updateFavCount();
+                    renderFavorites();
+                    showToast('💔 Retiré des favoris');
+                });
+            });
+        }
+
+        function addAllFavoritesToCart() {
+            if (favorites.length === 0) {
+                showToast('Aucun favori à ajouter');
+                return;
+            }
+            let count = 0;
+            favorites.forEach(fav => {
+                const size = favSizes[fav.uid] || null;
+                const existingIndex = cart.findIndex(i => i.uid === fav.uid && i.size === size);
+                if (existingIndex !== -1) {
+                    cart[existingIndex].quantity++;
+                } else {
+                    cart.push({ uid: fav.uid, name: fav.name, price: fav.price, image: fav.image, quantity: 1, size: size || null });
+                }
+                count++;
+            });
+            localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+            updateCartCount();
+            showToast(`✅ ${count} article(s) ajouté(s) au panier`);
+        }
+
+        // ======== SIDEBARS ========
+        function openSidebar(id) {
+            closeSidebars();
+            document.getElementById(id).classList.add('active');
+            document.getElementById('backdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeSidebars() {
+            document.querySelectorAll('.cart-sidebar-sombre, .favorites-sidebar').forEach(s => s.classList.remove('active'));
+            document.getElementById('backdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ======== TOAST ========
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 3000);
+        }
+
+        // ======== WHATSAPP ========
+        document.getElementById('whatsappOrder')?.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showToast('Votre panier est vide');
+                return;
+            }
+            
+            const phone = "225355677789";
+            let msg = "Bonjour Rimka Shop,%0A%0A*Commande :*%0A%0A";
+            
+            cart.forEach((item, i) => {
+                const sizeText = item.size ? ` (Taille ${item.size})` : '';
+                msg += `${i + 1}. *${item.name}*${sizeText} x${item.quantity} - ${(item.price * item.quantity).toLocaleString()} CFA%0A`;
+            });
+            
+            const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+            msg += `%0A*Total : ${total.toLocaleString()} CFA*`;
+            
+            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+            
+            cart = [];
+            localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+            updateCartCount();
+            renderCart();
+            showToast('✅ Commande envoyée ! Panier vidé.');
+        });
+
+        // ======== FORMULAIRE DE CONTACT ========
+        document.getElementById('submitForm')?.addEventListener('click', () => {
+            const firstName = document.getElementById('firstName')?.value || '';
+            const lastName = document.getElementById('lastName')?.value || '';
+            const email = document.getElementById('email')?.value || '';
+            const subject = document.getElementById('subject')?.value || '';
+            const message = document.getElementById('message')?.value || '';
+            
+            if (!firstName || !lastName || !email || !message) {
+                alert('Veuillez remplir tous les champs obligatoires.');
+                return;
+            }
+            
+            // Préparer le message WhatsApp
+            const phone = "225355677789";
+            let msg = `Bonjour Rimka Shop,%0A%0A*Nouveau message depuis le site web*%0A%0A`;
+            msg += `*Nom :* ${firstName} ${lastName}%0A`;
+            msg += `*Email :* ${email}%0A`;
+            msg += `*Sujet :* ${subject}%0A`;
+            msg += `*Message :*%0A${message}%0A%0A`;
+            msg += `Merci de me recontacter dès que possible.`;
+            
+            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+            
+            // Réinitialiser le formulaire
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('message').value = '';
+            
+            showToast('✅ Message envoyé ! Nous vous répondrons rapidement.');
+        });
+
+        // ======== INITIALISATION ========
+        document.getElementById('cartIcon')?.addEventListener('click', () => { renderCart(); openSidebar('cartSidebar'); });
+        document.getElementById('closeCart')?.addEventListener('click', closeSidebars);
+        document.getElementById('favIcon')?.addEventListener('click', () => { renderFavorites(); openSidebar('favoritesSidebar'); });
+        document.getElementById('closeFavorites')?.addEventListener('click', closeSidebars);
+        document.getElementById('backdrop')?.addEventListener('click', closeSidebars);
+        document.getElementById('addAllFavoritesToCart')?.addEventListener('click', addAllFavoritesToCart);
+        
+        window.addEventListener('scroll', () => {
+            document.querySelector('.header-sombre')?.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible-sombre');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.hidden-sombre').forEach(el => observer.observe(el));
+        
+        updateCartCount();
+        updateFavCount();
+        renderFavorites();
     </script>
 </body>
 </html>
